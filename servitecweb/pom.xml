@@ -20,6 +20,12 @@
 
 	<dependencies>
 
+		<!-- Modulo hibernate 5 para manejo de objetos de persistencia por parte de JackSon -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

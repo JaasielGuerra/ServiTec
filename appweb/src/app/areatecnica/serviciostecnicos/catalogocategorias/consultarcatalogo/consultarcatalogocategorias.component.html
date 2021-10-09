@@ -1,0 +1,68 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+
+  <ng-template #modalFormCategoria let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Nueva categoría</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form (ngSubmit)="guardarCategoria()" novalidate #f="ngForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Descripción</label>
+              <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="categoriaModel.descripcion" name="descripcion">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!f.form.valid" >Guardar</button>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Catálogo de categorías de servicios</h4>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-success" type="button" (click)="nuevaCategoria(modalFormCategoria)">Nueva
+            categoría</button>
+          <a class="btn btn-default" routerLink="/servicios-tecnicos">Regresar a servicios tecnicos</a>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>#</th>
+                <th>Descripción</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody *ngFor="let c of categoriasList">
+                <tr>
+                  <td>{{c.idCategoriaServicio}}</td>
+                  <td>{{c.descripcion}}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning btn-sm btn-round" (click)="editar(c.idCategoriaServicio, modalFormCategoria)">Editar</button>
+                    <button type="button" class="btn btn-danger btn-sm btn-round" (click)="eliminar(c.idCategoriaServicio)">Eliminar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Servicios técnicos registrados</h4>
+        </div>
+        <div class="card-body">
+          <a class="btn btn-success" routerLink="/servicios-tecnicos/nuevo">Registrar nuevo servicio</a>
+          <a class="btn btn-info" routerLink="/servicios-tecnicos/categorias">Catálogo de categorías</a>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>#</th>
+                <th>Descripción</th>
+                <th class="text-right">Precio A</th>
+                <th class="text-right">Precio B</th>
+                <th class="text-right">Precio C</th>
+                <th>Categoria</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody *ngFor="let s of servicios">
+                <tr>
+                  <td>{{s.idServicio}}</td>
+                  <td>{{s.descripcion}}</td>
+                  <td class="text-right">Q{{s.precioA}}</td>
+                  <td class="text-right">Q{{s.precioB}}</td>
+                  <td class="text-right">Q{{s.precioC}}</td>
+                  <td>{{s.categoriaServicio.descripcion}}</td>
+                  <td>
+                    <a  class="btn btn-warning btn-sm btn-round" routerLink="/servicios-tecnicos/editar/{{s.idServicio}}">Editar</a>
+                    <button type="button" class="btn btn-danger btn-sm btn-round" (click)="eliminar(s.idServicio)">Eliminar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

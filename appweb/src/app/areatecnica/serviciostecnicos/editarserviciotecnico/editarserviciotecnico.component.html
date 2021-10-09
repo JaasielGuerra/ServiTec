@@ -1,0 +1,96 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <ng-template #modalFormCategoria let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Nueva categoría</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form (ngSubmit)="guardarCategoria()" novalidate #f="ngForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Descripción</label>
+              <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="categoriaModel.descripcion" name="descripcion">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!f.form.valid">Guardar</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Editar servicio técnico</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="actualizar()" novalidate #f="ngForm">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Descripción</label>
+                  <input type="text" class="form-control" placeholder="Requerido" required
+                    [(ngModel)]="servicioTecnicoEditar.descripcion" name="descripcion">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Precio A</label>
+                  <input type="number" class="form-control" placeholder="Q." required [(ngModel)]="servicioTecnicoEditar.precioA"
+                    name="precioA">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Precio B</label>
+                  <input type="number" class="form-control" placeholder="Q." required [(ngModel)]="servicioTecnicoEditar.precioB"
+                    name="precioB">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Precio C</label>
+                  <input type="number" class="form-control" placeholder="Q." required [(ngModel)]="servicioTecnicoEditar.precioC"
+                    name="precioC">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Categoría</label>
+                <select class="form-control" id="categoria" [(ngModel)]="idCatSeleccionada" name="idCatSeleccionada" required>
+                  <option value="{{-1}}">- Seleccione una categoría -</option>
+                  <option *ngFor="let c of categorias" [value]="c.idCategoriaServicio">{{c.descripcion}}</option>
+                </select>
+              </div>
+              <div class="col-md-3 d-flex align-items-end">
+                <button type="button" class="btn btn-info btn-round mb-0" (click)="nuevaCategoria(modalFormCategoria)"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="dropdown-divider"></div>
+            </div>
+            <a class="btn btn-default" routerLink="/servicios-tecnicos">Regresar a servicios tecnicos</a>
+            <button class="btn btn-success" [disabled]="(!f.valid) || (idCatSeleccionada == -1)">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

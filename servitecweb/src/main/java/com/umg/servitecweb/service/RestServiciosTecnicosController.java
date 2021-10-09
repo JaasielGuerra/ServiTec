@@ -28,7 +28,7 @@ import com.umg.servitecweb.repository.ICategoriaServicioRepo;
 import com.umg.servitecweb.repository.IServicioRepo;
 import com.umg.servitecweb.repository.IUsuarioRepo;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/serviciostecnicos")
 public class RestServiciosTecnicosController {
@@ -76,6 +76,16 @@ public class RestServiciosTecnicosController {
 		List<CategoriaServicio> cats = categoriaServicioRepo.findByEstado(status);
 
 		return cats;
+	}
+
+	@GetMapping("/categorias/{id}")
+	public CategoriaServicio obtenerCategoria(@PathVariable Integer id) {
+
+		log.debug("consultando por id: " + id);
+
+		CategoriaServicio c = categoriaServicioRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));;
+
+		return c;
 	}
 
 	@PutMapping("/categorias/{id}")
@@ -132,6 +142,15 @@ public class RestServiciosTecnicosController {
 		return l;
 	}
 
+	@GetMapping("/{id}")
+	public Servicio obtenerServicio(@PathVariable Integer id) {
+
+		Servicio l = servicioRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+
+		return l;
+	}
+
+	
 	@PutMapping("/{id}")
 	public Servicio actualizarServicio(@RequestBody Servicio s,
 			@RequestParam(value = "idcategoria", required = true) Integer idCate,

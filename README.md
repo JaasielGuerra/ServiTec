@@ -5,7 +5,9 @@ SISTEMA PARA CONTROL DE SERVICIOS TECNICOS
 ## Conexion base de datos desarrollo
 
 **Datos de conexión a MariaDB back-end**
+
 En el archivo `servitecweb/src/main/resources/application.properties` se encuentras la siguiente configuración:
+
 ```
     spring.datasource.url=jdbc:mariadb://localhost/db_servitec
     spring.datasource.username=root

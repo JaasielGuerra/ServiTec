@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="title" id="modal-basic-title">Nueva categoría</h4>
+  <button type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form (ngSubmit)="guardarCategoria()" novalidate #f="ngForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Descripción</label>
+          <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="categoriaModel.descripcion" name="descripcion">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="!f.form.valid">Guardar</button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" >Cerrar</button>
+</div>

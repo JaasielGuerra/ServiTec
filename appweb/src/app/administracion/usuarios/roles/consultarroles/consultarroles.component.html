@@ -1,0 +1,134 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+
+  <ng-template #modalFormRol let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Formulario Rol</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form novalidate #f="ngForm">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label>Nombre rol</label>
+            <input type="text" class="form-control" placeholder="Requerido" required>
+          </div>
+        </div>
+
+        <h5>Permisos</h5>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx1">
+              <label class="custom-control-label" for="cbx1">Generar ordenes</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx2">
+              <label class="custom-control-label" for="cbx2">Atender ordenes</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx3">
+              <label class="custom-control-label" for="cbx3">Cobrar servicios</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx4">
+              <label class="custom-control-label" for="cbx4">Control usuarios</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx5">
+              <label class="custom-control-label" for="cbx5">Generar reportes</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx6">
+              <label class="custom-control-label" for="cbx6">Dashboard</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx7">
+              <label class="custom-control-label" for="cbx7">Servicios tecnicos</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx8">
+              <label class="custom-control-label" for="cbx8">Inventario repuestos</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cbx9">
+              <label class="custom-control-label" for="cbx9">Personal técnico</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!f.form.valid">Guardar</button>
+
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Roles registrados</h4>
+        </div>
+        <div class="card-body">
+          <button class="btn btn-success" type="button" (click)="nuevoRol(modalFormRol)">Nuevo Rol</button>
+          <a class="btn btn-default" routerLink="/usuarios">Regresar a usuarios</a>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{1}}</td>
+                  <td>{{''}}</td>
+                  <td>{{''}}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning btn-sm btn-round">Editar</button>
+                    <button type="button" class="btn btn-danger btn-sm btn-round">Desactivar</button>
+                    <button type="button" class="btn btn-success btn-sm btn-round">Activar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,131 @@
+<div class="panel-header">
+  <div class="header pl-5 pr-5">
+    <div class="row">
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-success font-italic">Reservadas:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">10</label>
+      </div>
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-info font-italic">Atendiendo:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">3</label>
+      </div>
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-warning font-italic">Pendientes:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">3</label>
+      </div>
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-white font-italic">Fecha:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">Fecha aqui</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-danger font-italic">Técnico:</h6>
+      </div>
+      <div class="col-md-8 col-lg-6">
+        <label class="text-white font-italic">Nombre del tecnino logueado</label>
+      </div>
+  </div>
+</div>
+
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Atender ordenes de servicio</h4>
+        </div>
+        <div class="card-body">
+
+          <form>
+            <div class="row">
+              <div class="col-md-2">
+                <label>Estado</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Prioridad</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Motivo</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Cliente</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Fecha</label>
+                <input type="date" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>#</th>
+                <th>Fecha Ingreso</th>
+                <th>Entrega máxima</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>Prioridad</th>
+                <th>Motivo</th>
+                <th>Cliente</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>demo</td>
+                  <td>asds</td>
+                  <td>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
+                  </td>
+                  <td>
+                    <span class="badge badge-success">Reservada</span>
+                    <span class="badge badge-warning">Pendiente</span>
+                    <span class="badge badge-primary">Atendiendo</span>
+                  </td>
+                  <td>
+                    <span class="badge badge-danger">Alta</span>
+                    <span class="badge badge-warning">Media</span>
+                    <span class="badge badge-success">Baja</span>
+                  </td>
+                  <td>asds</td>
+                  <td>asds</td>
+                  <td>
+                    <a class="btn btn-info btn-sm btn-round" routerLink="/atender-ordenes/atender/1">Atender</a>
+                    <a class="btn btn-success btn-sm btn-round"  routerLink="/atender-ordenes/atender/1">Continuar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <ng-template #disponibilidad let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Disponibilidad</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="col-md-3">
+          <label class="font-italic font-weight-bold">Técnico: </label>
+        </div>
+        <div class="col-md-9">
+          <label class="font-italic">Nombre</label>
+        </div>
+        <div class="col-md-3">
+          <label class="font-italic font-weight-bold">Trabajos: </label>
+        </div>
+        <div class="col-md-9">
+          <label class="font-italic text-info">10</label>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Crear orden</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <h5>Datos de la orden</h5>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Descripcion orden</label>
+                      <input type="text" class="form-control" value="demo">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Descripcion recibido</label>
+                      <input type="text" class="form-control" value="demo">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="imagen">Imagen de referencia</label>
+                  <input type="file" class="form-control-file" id="imagen">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Motivo</label>
+                <select class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>Fecha ingreso</label>
+                <input type="date" class="form-control">
+              </div>
+              <div class="col-md-4 form-group">
+                <label>Fecha máxima a entregar</label>
+                <input type="date" class="form-control">
+              </div>
+            </div>
+
+            <h5>Asignaciones</h5>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Prioridad</label>
+                <select class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-9 form-group">
+                <label>Cliente</label>
+                <select class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-info btn-round"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-9 form-group">
+                <label>Técnico</label>
+                <select class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="col-md-3 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-round" (click)="verDispobilidadTecnico(disponibilidad)"><i class="fa fa-eye"></i>Disponibilidad</button>
+              </div>
+            </div>
+
+            <hr>
+            <a class="btn btn-default" routerLink="/ordenes-servicio">Regresar a consultar ordenes</a>
+            <button class="btn btn-success">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

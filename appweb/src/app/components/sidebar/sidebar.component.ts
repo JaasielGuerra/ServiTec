@@ -18,7 +18,6 @@ export const ROUTES: RouteInfo[] = [
     //area tecnica
     { path: '/servicios-tecnicos', title: 'Servicios tecnicos',  icon:'emoticons_satisfied', class: '' },
     { path: '/personal-tecnico', title: 'Personal tecnico',  icon:'emoticons_satisfied', class: '' },
-    { path: '/catalogo-ordenes', title: 'Catálogos ordenes',  icon:'emoticons_satisfied', class: '' },
     { path: '/inventario-repuestos', title: 'Inventario repuestos',  icon:'emoticons_satisfied', class: '' },
 
     //administracion

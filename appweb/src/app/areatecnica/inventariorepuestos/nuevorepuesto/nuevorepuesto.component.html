@@ -1,1 +1,85 @@
-<p>nuevorepuesto works!</p>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Registrar repuesto</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Descripción</label>
+                  <input type="text" class="form-control" placeholder="Requerido" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Precio</label>
+                  <input type="number" class="form-control" placeholder="Q." required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Cantidad</label>
+                  <input type="number" class="form-control" placeholder="Cantidad" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 form-group">
+                <label>Registrar con estado</label>
+                <select class="form-control" required>
+                  <option value="{{1}}">Activo</option>
+                  <option value="{{0}}">Inactivo</option>
+                </select>
+              </div>
+              <div class="col-md-3 form-group">
+                <label>Estante</label>
+                <select class="form-control" required>
+                  <option value="{{0}}">Estantes</option>
+                </select>
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-info btn-round"><i class="fa fa-plus"></i></button>
+              </div>
+              <div class="col-md-3 form-group">
+                <label>Ubicacion</label>
+                <select class="form-control" required>
+                  <option value="{{0}}">ubicaciones</option>
+                </select>
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-info btn-round"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 form-group">
+                <label>Caja</label>
+                <select class="form-control" required>
+                  <option value="{{0}}">cajas</option>
+                </select>
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-info btn-round"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+
+
+            <hr>
+            <a class="btn btn-default" routerLink="/inventario-repuestos">Regresar a consultar inventario</a>
+            <button class="btn btn-success">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

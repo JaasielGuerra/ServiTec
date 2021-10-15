@@ -1,0 +1,330 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <ng-template #modalCliente let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Cliente</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <img src="../../../../assets/img/icons8-customer-100.png" class="img-fluid mx-auto d-block mb-3" alt="customer">
+      <div class="row">
+        <div class="col-md-3 font-weight-bold font-italic">Nombre:</div>
+        <div class="col-md-9 font-italic">Lorem, ipsum dolor.</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 font-weight-bold font-italic">Teléfono:</div>
+        <div class="col-md-9 font-italic">123</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 font-weight-bold font-italic">Correo:</div>
+        <div class="col-md-9 font-italic">Lorem ipsum dolor sit.</div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <ng-template #modalImagen let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Agregar foto</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form novalidate #f="ngForm">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="file" class="form-control-file" id="imagen">
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Descripción</label>
+            <input type="text" class="form-control" required value="demo">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!f.form.valid">Aceptar</button>
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #modalServicio let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Agregar servicio</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form novalidate #f="ngForm">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label>Seleccionar servicio</label>
+            <select class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="col-md-8 form-group">
+            <label>Seleccione precio</label>
+            <select class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="col-md-4 form-group">
+            <label>Cantidad</label>
+            <input type="number" class="form-control" required placeholder="Cantidad">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!f.form.valid">Aceptar</button>
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <ng-template #modalRepuesto let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Agregar repuesto</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form novalidate #f="ngForm">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label>Seleccionar repuesto</label>
+            <select class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="col-md-4 form-group">
+            <label>Precio</label>
+            <input type="number" class="form-control" required placeholder="Q">
+          </div>
+          <div class="col-md-4 form-group">
+            <label>Cantidad</label>
+            <input type="number" class="form-control" required placeholder="Cantidad">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!f.form.valid">Aceptar</button>
+      </form>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <form action="#">
+          <div class="card-header">
+            <h5 class="title">Atender orden de servicio</h5>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card text-white bg-secondary">
+                  <div class="card-header text-center">
+                    <h6 class="font-italic font-weight-bold"><ins>Orden de servicio</ins></h6>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="row">
+                      <div class="col-md-10">
+                        <div class="row">
+                          <div class="col-md-3 font-weight-bold font-italic">Descripcion orden:</div>
+                          <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Obcaecati, provident.</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3 font-weight-bold font-italic">Descripcion recibido:</div>
+                          <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Obcaecati, provident.</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3 font-weight-bold font-italic">Motivo:</div>
+                          <div class="col-md-6 font-italic">Lorem ipsum.</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3 font-weight-bold font-italic">Prioridad:</div>
+                          <div class="col-md-6 font-italic">Lorem ipsum.</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3 font-weight-bold font-italic">Cliente:</div>
+                          <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet.</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <hr>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-2">
+                            <h5 class="font-weight-bold font-italic"><ins>Total costo:</ins></h5>
+                          </div>
+                          <div class="col-md-2">
+                            <h5 class="font-weight-bold font-italic text-success"><ins>Q100.0</ins></h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="font-weight-bold font-italic">Imagen referencia:</div>
+                        <img src="../../../../assets/img/angular2-logo-red.png" class="img-fluid img-thumbnail"
+                          alt="img">
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-info" (click)="detallesCliente(modalCliente)">Detalles
+                      cliente</button>
+                    <button type="button" class="btn btn-warning">Poner pendiente</button>
+                    <button type="button" class="btn btn-danger">Finalizar</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <label>Diagnóstico técnico</label>
+                <input type="text" class="form-control" placeholder="Describa el diagnóstico técnico..." required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                  <label>Fotos diagnóstico</label>
+                  <button type="button" class="btn btn-success btn-sm btn-round"
+                    (click)="agregarFoto(modalImagen)">Agregar</button>
+                </div>
+                <table class="table table-sm table-bordered table-striped">
+                  <thead class="thead-dark">
+                    <th>#</th>
+                    <th>Imagen</th>
+                    <th>Descripcion</th>
+                    <th class="text-center">Quitar</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>...</td>
+                      <td>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
+                      </td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btn-round">Quitar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                  <label>Servicios aplicados</label>
+                  <button type="button" class="btn btn-success btn-sm btn-round"
+                    (click)="agregarServicio(modalServicio)">Agregar</button>
+                </div>
+                <table class="table table-sm table-bordered table-striped">
+                  <thead class="thead-dark">
+                    <th>#</th>
+                    <th>Servicio</th>
+                    <th class="text-right">Precio</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Quitar</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                      <td class="text-right">Q100.0</td>
+                      <td class="text-center">2</td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btn-round">Quitar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                  <label>Repuestos empleados</label>
+                  <button type="button" class="btn btn-success btn-sm btn-round" (click)="agregarRepuesto(modalRepuesto)">Agregar</button>
+                </div>
+                <table class="table table-sm table-bordered table-striped">
+                  <thead class="thead-dark">
+                    <th>#</th>
+                    <th>Repuesto</th>
+                    <th class="text-right">Precio</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Quitar</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                      <td class="text-right">Q100.0</td>
+                      <td class="text-center">2</td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm btn-round">Quitar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 form-group">
+                <label>Descripción de extras aplicados</label>
+                <input type="text" class="form-control" placeholder="Extras aplicados" required>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>Costo de extras</label>
+                <input type="number" class="form-control" placeholder="Q" required>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -4,26 +4,41 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Personal técnico registrado</h4>
+          <h4 class="card-title">Clientes registrados</h4>
         </div>
         <div class="card-body">
-          <a class="btn btn-success" routerLink="/personal-tecnico/crear" >Nuevo Personal</a>
+          <a class="btn btn-success" routerLink="/clientes/crear">Nuevo cliente</a>
+
+          <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+              <form class="form-inline">
+                <input type="text" class="form-control form-control-sm" placeholder="Buscar por codigo de cliente">
+                <button type="button" class="btn btn-primary btn-sm">Consultar</button>
+              </form>
+            </div>
+          </div>
 
           <div class="table-responsive">
             <table class="table">
               <thead class="text-primary">
                 <th>#</th>
-                <th>Nombre completo</th>
-                <th>Estado</th>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Referencia</th>
+                <th>Correo</th>
                 <th>Operaciones</th>
               </thead>
-              <tbody >
+              <tbody>
                 <tr>
                   <td>1</td>
+                  <td>123</td>
+                  <td>demo</td>
+                  <td>123</td>
                   <td>asds</td>
                   <td>asds</td>
                   <td>
-                    <a  class="btn btn-warning btn-sm btn-round">Editar</a>
+                    <a class="btn btn-warning btn-sm btn-round">Editar</a>
                     <button type="button" class="btn btn-danger btn-sm btn-round">Desactivar</button>
                     <button type="button" class="btn btn-primary btn-sm btn-round">Activar</button>
                   </td>

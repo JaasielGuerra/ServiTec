@@ -6,7 +6,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Crear personal</h5>
+          <h5 class="title">Crear usuario</h5>
         </div>
         <div class="card-body">
           <form>
@@ -20,19 +20,23 @@
             </div>
 
             <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Usuario</label>
+                  <input type="text" class="form-control" placeholder="Requerido" required>
+                </div>
+              </div>
               <div class="col-md-3 form-group">
-                <label>Registrar con estado</label>
-                <select class="form-control" required>
-                  <option value="{{1}}">Activo</option>
-                    <option value="{{0}}">Inactivo</option>
-                </select>
+                <label>Clave</label>
+                <input type="text" [ngClass]="{'form-control': true}"
+                  placeholder="Requerido" required>
               </div>
 
             </div>
 
             <div class="row">
-              <div class="col-md-8 form-group">
-                <label>Asignar usuario</label>
+              <div class="col-md-6 form-group">
+                <label>Asignar rol</label>
                 <select class="form-control" required>
                   <option value="{{-1}}">Seleccione</option>
                 </select>
@@ -44,7 +48,7 @@
 
             <hr>
 
-            <a class="btn btn-default" routerLink="/personal-tecnico">Regresar a consultar personal</a>
+            <a class="btn btn-default" routerLink="/usuarios">Regresar a consultar usuarios</a>
             <button class="btn btn-success">Guardar</button>
           </form>
         </div>

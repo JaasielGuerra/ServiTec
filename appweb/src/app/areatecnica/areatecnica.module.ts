@@ -10,20 +10,18 @@ import { ConsultarpersonalComponent } from "./personaltecnico/consultarpersonal/
 import { RegistrarpersonalComponent } from "./personaltecnico/registrarpersonal/registrarpersonal.component";
 import { EditarpersonalComponent } from "./personaltecnico/editarpersonal/editarpersonal.component";
 import { NuevorepuestoComponent } from "./inventariorepuestos/nuevorepuesto/nuevorepuesto.component";
-import { EditarrepuestoComponent } from "./inventariorepuestos/editarrepuesto/editarrepuesto.component";
 import { ConsultarcajasComponent } from "./inventariorepuestos/cajas/consultarcajas/consultarcajas.component";
 import { ConsultarestantesComponent } from "./inventariorepuestos/estantes/consultarestantes/consultarestantes.component";
 import { ConsultarubicacionesComponent } from "./inventariorepuestos/ubicaciones/consultarubicaciones/consultarubicaciones.component";
-import { ConsultarcatalogomotivosComponent } from "./catalogosordenes/motivos/consultarcatalogomotivos/consultarcatalogomotivos.component";
-import { ConsultarcatalogoprioridadesComponent } from "./catalogosordenes/prioridades/consultarcatalogoprioridades/consultarcatalogoprioridades.component";
 import { ConsultainventarioComponent } from "./inventariorepuestos/consultainventario/consultainventario.component";
-import { ConsultarcatalogosordenesComponent } from "./catalogosordenes/consultarcatalogosordenes/consultarcatalogosordenes.component";
 import { ServiciostecnicosService } from "./service/serviciostecnicos.service";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { CategoriaservicioService } from "./service/categoriaservicio.service";
-import { CrearcategoriaComponent } from './serviciostecnicos/catalogocategorias/crearcategoria/crearcategoria.component';
 import { EditarserviciotecnicoComponent } from './serviciostecnicos/editarserviciotecnico/editarserviciotecnico.component';
+import { CatalogosinventarioComponent } from './inventariorepuestos/catalogosinventario/catalogosinventario.component';
+import { AgregarinventarioComponent } from './inventariorepuestos/agregarinventario/agregarinventario.component';
+import { AjustarinventarioComponent } from './inventariorepuestos/ajustarinventario/ajustarinventario.component';
 
 @NgModule({
   declarations: [
@@ -34,16 +32,14 @@ import { EditarserviciotecnicoComponent } from './serviciostecnicos/editarservic
     RegistrarpersonalComponent,
     EditarpersonalComponent,
     NuevorepuestoComponent,
-    EditarrepuestoComponent,
     ConsultarcajasComponent,
     ConsultarestantesComponent,
     ConsultarubicacionesComponent,
-    ConsultarcatalogomotivosComponent,
-    ConsultarcatalogoprioridadesComponent,
     ConsultainventarioComponent,
-    ConsultarcatalogosordenesComponent,
-    CrearcategoriaComponent,
     EditarserviciotecnicoComponent,
+    CatalogosinventarioComponent,
+    AgregarinventarioComponent,
+    AjustarinventarioComponent,
   ],
   imports: [
     CommonModule,

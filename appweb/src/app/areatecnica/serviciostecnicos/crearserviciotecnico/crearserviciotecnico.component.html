@@ -17,7 +17,8 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Descripción</label>
-              <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="categoriaModel.descripcion" name="descripcion">
+              <input type="text" class="form-control" placeholder="Requerido" required
+                [(ngModel)]="categoriaModel.descripcion" name="descripcion">
             </div>
           </div>
         </div>
@@ -73,18 +74,19 @@
             <div class="row">
               <div class="col-md-6">
                 <label>Categoría</label>
-                <select class="form-control" id="categoria" [(ngModel)]="idCatSeleccionada" name="idCatSeleccionada" required>
+                <select class="form-control" id="categoria" [(ngModel)]="idCatSeleccionada" name="idCatSeleccionada"
+                  required>
                   <option value="{{-1}}">- Seleccione una categoría -</option>
                   <option *ngFor="let c of categorias" [value]="c.idCategoriaServicio">{{c.descripcion}}</option>
                 </select>
               </div>
               <div class="col-md-3 d-flex align-items-end">
-                <button type="button" class="btn btn-info btn-round mb-0" (click)="nuevaCategoria(modalFormCategoria)"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-info btn-round mb-0"
+                  (click)="nuevaCategoria(modalFormCategoria)"><i class="fa fa-plus"></i></button>
               </div>
             </div>
-            <div class="row">
-              <div class="dropdown-divider"></div>
-            </div>
+
+            <hr>
             <a class="btn btn-default" routerLink="/servicios-tecnicos">Regresar a servicios tecnicos</a>
             <button class="btn btn-success" [disabled]="(!f.valid) || (idCatSeleccionada == -1)">Guardar</button>
           </form>

@@ -1,0 +1,90 @@
+<div class="panel-header">
+  <div class="header pl-5 pr-5">
+    <div class="row">
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-info font-italic">Cantidad:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">10</label>
+      </div>
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-success font-italic">Aplicadas:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">3</label>
+      </div>
+      <div class="col-md-3 col-lg-2">
+        <h6 class="text-danger font-italic">No aplicadas:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">3</label>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Cobro de servicios</h4>
+        </div>
+        <div class="card-body">
+
+          <a class="btn btn-info" routerLink="/cobro-servicios/cobros">Consultar servicios cobrados</a>
+
+          <form>
+            <div class="row">
+              <div class="col-md-2">
+                <label>Numero orden</label>
+                <input type="number" class="form-control form-control-sm" placeholder="#">
+              </div>
+              <div class="col-md-2">
+                <label>Cliente</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th># orden</th>
+                <th>Descripcion orden</th>
+                <th>Servicio aplicado</th>
+                <th class="text-right">Costo total</th>
+                <th>Cliente</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
+                  </td>
+                  <td>
+                    <span class="badge badge-success">SI</span>
+                    <span class="badge badge-danger">NO</span>
+                  </td>
+                  <td class="text-right">Q1500</td>
+                  <td>Cliente</td>
+                  <td>
+                    <a class="btn btn-success btn-sm btn-round" routerLink="/cobro-servicios/cobrar/1">Cobrar</a>
+                    <a class="btn btn-danger btn-sm btn-round" routerLink="/cobro-servicios/cobrar/1">Entregar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

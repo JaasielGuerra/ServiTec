@@ -1,0 +1,86 @@
+<div class="panel-header">
+  <div class="header pl-5 pr-5">
+    <div class="row">
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-info font-italic">Cantidad:</h6>
+      </div>
+      <div class="col-md-1 col-lg-1">
+        <label class="text-white font-italic">10</label>
+      </div>
+      <div class="col-md-2 col-lg-1">
+        <h6 class="text-danger font-italic">Total:</h6>
+      </div>
+      <div class="col-md-3 col-lg-3">
+        <label class="text-white font-italic">Q1500.0</label>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Servicios cobrados</h4>
+        </div>
+        <div class="card-body">
+
+          <a class="btn btn-default" routerLink="/cobro-servicios">Regresar a cobro de servicios</a>
+
+          <form>
+            <div class="row">
+              <div class="col-md-2">
+                <label>Numero orden</label>
+                <input type="number" class="form-control form-control-sm" placeholder="#">
+              </div>
+              <div class="col-md-2">
+                <label>Cliente</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Fecha entrega</label>
+                <input type="date" class="form-control form-control-sm">
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th># orden</th>
+                <th>Fecha ingreso</th>
+                <th>Fecha entrega</th>
+                <th>Descripcion orden</th>
+                <th class="text-right">Costo total</th>
+                <th>Cliente</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>fecha</td>
+                  <td>fecha</td>
+                  <td>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
+                  </td>
+                  <td class="text-right">Q1500</td>
+                  <td>Cliente</td>
+                  <td>
+                    <button type="button" class="btn btn-info btn-sm btn-round">Imprimir comprobante</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

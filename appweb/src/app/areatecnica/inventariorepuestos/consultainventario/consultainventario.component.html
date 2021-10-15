@@ -1,4 +1,83 @@
-<div class="panel-header panel-header-sm">
-</div>
+<div class="panel-header panel-header-sm"></div>
 <div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Inventario de repuestos</h4>
+        </div>
+        <div class="card-body">
+          <a class="btn btn-success" routerLink="/inventario-repuestos/nuevo">Registrar nuevo repuesto</a>
+          <a class="btn btn-info" routerLink="/inventario-repuestos/catalogos">Catalogos</a>
+
+
+          <form>
+            <div class="row">
+              <div class="col-md-2">
+                <label>Estante</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Ubicacion</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label>Caja</label>
+                <select class="form-control form-control-sm">
+                  <option value="{{0}}">Seleccionar</option>
+                </select>
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th>#</th>
+                <th>Descripcion
+
+                </th>
+                <th class="text-right">Precio</th>
+                <th class="text-center">Existencia</th>
+                <th>Estante
+
+                </th>
+                <th>Ubicacion</th>
+                <th>Caja</th>
+                <th>Estado</th>
+                <th>Operaciones</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>demo</td>
+                  <td class="text-right">123</td>
+                  <td class="text-center">12</td>
+                  <td>asds</td>
+                  <td>asds</td>
+                  <td>asds</td>
+                  <td>asds</td>
+                  <td>
+                    <a class="btn btn-warning btn-sm btn-round">Editar</a>
+                    <button type="button" class="btn btn-danger btn-sm btn-round">Desactivar</button>
+                    <button type="button" class="btn btn-primary btn-sm btn-round">Activar</button>
+                    <a class="btn btn-success btn-sm btn-round"  routerLink="/inventario-repuestos/agregar/1">Agregar</a>
+                    <a class="btn btn-info btn-sm btn-round" routerLink="/inventario-repuestos/ajustar/1">Ajustar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,1 +1,57 @@
-<p>consultarubicaciones works!</p>
+<ng-template #modalFormUbicacion let-modal>
+
+  <div class="modal-header">
+    <h4 class="title" id="modal-basic-title">Nueva ubicación</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form novalidate #f="ngForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Descripción</label>
+            <input type="text" class="form-control" placeholder="Requerido" required>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" [disabled]="!f.form.valid" >Guardar</button>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+  </div>
+</ng-template>
+
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title">Ubicaciones</h6>
+
+    <button class="btn btn-success" type="button" (click)="nuevaUbicacion(modalFormUbicacion)">Nuevo ubicacion</button>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="text-primary">
+          <th>#</th>
+          <th>Descripción</th>
+          <th>Operaciones</th>
+        </thead>
+        <tbody >
+          <tr>
+            <td>{{1}}</td>
+            <td>{{'demo'}}</td>
+            <td>
+              <button type="button" class="btn btn-warning btn-sm btn-round" >Editar</button>
+              <button type="button" class="btn btn-danger btn-sm btn-round" >Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

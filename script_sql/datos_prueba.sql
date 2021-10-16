@@ -48,6 +48,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `estado_orden` WRITE;
 /*!40000 ALTER TABLE `estado_orden` DISABLE KEYS */;
+INSERT INTO `estado_orden` VALUES (1,'Reservada',1),(2,'Atendiendo',1),(3,'Pendiente',1),(4,'Finalizada',1),(5,'Cobrada y entregada',1),(6,'Solo entregada',1);
 /*!40000 ALTER TABLE `estado_orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,6 +161,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `tecnico` WRITE;
 /*!40000 ALTER TABLE `tecnico` DISABLE KEYS */;
+INSERT INTO `tecnico` VALUES (1,'Tecnico de prueba',1,'2021-10-15','22:50:50',1);
 /*!40000 ALTER TABLE `tecnico` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-15 21:36:44
+-- Dump completed on 2021-10-15 23:19:10

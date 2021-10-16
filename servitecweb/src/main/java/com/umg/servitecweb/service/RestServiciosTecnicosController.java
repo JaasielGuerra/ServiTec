@@ -83,7 +83,9 @@ public class RestServiciosTecnicosController {
 
 		log.debug("consultando por id: " + id);
 
-		CategoriaServicio c = categoriaServicioRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));;
+		CategoriaServicio c = categoriaServicioRepo.findById(id)
+				.orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+		;
 
 		return c;
 	}
@@ -95,7 +97,8 @@ public class RestServiciosTecnicosController {
 			c.setDescripcion(categ.getDescripcion());
 			return categoriaServicioRepo.save(c);
 		}).orElseGet(() -> { // sino existe se crea una nueva
-			CategoriaServicio c = categ;
+			CategoriaServicio c = new CategoriaServicio();
+			c.setDescripcion(categ.getDescripcion());
 			c.setEstado(1);
 			return categoriaServicioRepo.save(c);
 		});
@@ -150,7 +153,6 @@ public class RestServiciosTecnicosController {
 		return l;
 	}
 
-	
 	@PutMapping("/{id}")
 	public Servicio actualizarServicio(@RequestBody Servicio s,
 			@RequestParam(value = "idcategoria", required = true) Integer idCate,
@@ -175,6 +177,7 @@ public class RestServiciosTecnicosController {
 		}).orElseGet(() -> { // sino existe el recurso a actualizar, entonces se crea uno
 
 			Servicio ser = s;
+			ser.setIdServicio(0);
 			ser.setCategoriaServicio(c);
 			ser.setUsuario(u);
 			ser.setEstado(1);
@@ -188,7 +191,7 @@ public class RestServiciosTecnicosController {
 
 		return servicio;
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void eliminarServicio(@PathVariable Integer id) {
 

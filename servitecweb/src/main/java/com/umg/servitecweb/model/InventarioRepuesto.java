@@ -18,7 +18,7 @@ public class InventarioRepuesto implements Serializable {
 
 	@Id
 	@Column(name="id_inventario_repuesto")
-	private String idInventarioRepuesto;
+	private Long idInventarioRepuesto;
 
 	private String descripcion;
 
@@ -63,11 +63,11 @@ public class InventarioRepuesto implements Serializable {
 	public InventarioRepuesto() {
 	}
 
-	public String getIdInventarioRepuesto() {
+	public Long getIdInventarioRepuesto() {
 		return this.idInventarioRepuesto;
 	}
 
-	public void setIdInventarioRepuesto(String idInventarioRepuesto) {
+	public void setIdInventarioRepuesto(Long idInventarioRepuesto) {
 		this.idInventarioRepuesto = idInventarioRepuesto;
 	}
 

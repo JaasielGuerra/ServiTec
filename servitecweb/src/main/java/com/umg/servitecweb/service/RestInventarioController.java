@@ -55,9 +55,8 @@ public class RestInventarioController {
 	@PostMapping("/cajas")
 	public Caja crearCaja(@RequestBody Caja c) {
 		c.setEstado(1);
-		Caja c1 = cajaRepo.save(c);
 		log.info("nueva caja registrada");
-		return c1;
+		return cajaRepo.save(c);
 	}
 
 	@PostMapping("/cajas/{id}")

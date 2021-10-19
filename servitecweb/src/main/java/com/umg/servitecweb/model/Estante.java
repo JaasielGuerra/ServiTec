@@ -16,6 +16,7 @@ public class Estante implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_estante")
 	private int idEstante;
 

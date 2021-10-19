@@ -20,10 +20,10 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_cliente")
-	private String idCliente;
+	private Long idCliente;
 
 	@Column(name="codigo_cliente")
-	private long codigoCliente;
+	private String codigoCliente;
 
 	private String correo;
 
@@ -55,19 +55,19 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
-	public String getIdCliente() {
+	public Long getIdCliente() {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(String idCliente) {
+	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public long getCodigoCliente() {
+	public String getCodigoCliente() {
 		return this.codigoCliente;
 	}
 
-	public void setCodigoCliente(long codigoCliente) {
+	public void setCodigoCliente(String codigoCliente) {
 		this.codigoCliente = codigoCliente;
 	}
 

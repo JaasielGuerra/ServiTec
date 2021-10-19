@@ -20,6 +20,7 @@
 
 LOCK TABLES `caja` WRITE;
 /*!40000 ALTER TABLE `caja` DISABLE KEYS */;
+INSERT INTO `caja` VALUES (1,'demo caja',1,1),(2,'demo',1,1),(3,'demo',1,1),(4,'demo caja',1,1),(5,'demo caja',1,1),(6,'demo caja',1,1),(7,'demo caja',1,1),(8,'demo caja',1,1),(9,'demo caja',1,1),(10,'demo caja',1,1),(11,'demo caja',1,1),(12,'demo caja',1,1),(13,'demo caja',1,1);
 /*!40000 ALTER TABLE `caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -29,7 +30,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `categoria_servicio` WRITE;
 /*!40000 ALTER TABLE `categoria_servicio` DISABLE KEYS */;
-INSERT INTO `categoria_servicio` VALUES (1,'Categoria actualiza',0),(2,'Categoria demo',0),(3,'Categoria actualiza',0),(4,'Categoria demo',0),(5,'Categoria demo',0),(6,'Categoria demo',1),(7,'Categoria demo',1),(8,'Categoria actualizadaaa',1),(9,'Categoria actualizadaaa',1),(10,'Categoria actualizadaaa',1),(11,'Categoria actualizadaaa',1),(12,'Categoria actualiza',1),(13,'Categoria actualiza',1),(14,'Categoria actualiza',1),(15,'Categoria actualiza',1),(16,'Categoria actualiza',1),(17,'Categoria actualiza',1),(18,'angular 1',1),(19,'a',1),(20,'ASAA',1),(21,'DEMO',1),(22,'ASD',1),(23,'demo',1),(24,'asd',1),(25,'asd',1),(26,'ASD',1),(27,'A',1),(28,'A',1),(29,'a',1),(30,'a',1),(31,'a',1),(32,'as',1),(33,'a',1),(34,'a',1),(35,'aa',1),(36,'aa',1),(37,'as',1),(38,'as',1),(39,'demo',1),(40,'demo',1),(41,'demo',1);
+INSERT INTO `categoria_servicio` VALUES (1,'Categoria actualiza',0),(2,'Categoria demo',0),(3,'Categoria actualiza',0),(4,'Categoria demo',0),(5,'Categoria demo',0),(6,'Categoria demo',1),(7,'Categoria demo',1),(8,'Categoria actualizadaaa',1),(9,'Categoria actualizadaaa',1),(10,'Categoria actualizadaaa',1),(11,'Categoria actualizadaaa',1),(12,'Categoria actualiza',1),(13,'Categoria actualiza',1),(14,'Categoria actualiza',1),(15,'Categoria actualiza',1),(16,'Categoria actualiza',1),(17,'Categoria actualiza',1),(18,'angular 1',1),(19,'a',1),(20,'ASAA',1),(21,'DEMO',1),(22,'ASD',1),(23,'demo',1),(24,'asd',1),(25,'asd',1),(26,'ASD',1),(27,'A',1),(28,'A',1),(29,'a',1),(30,'a',1),(31,'a',1),(32,'as',1),(33,'a',1),(34,'a',1),(35,'aa',1),(36,'aa',1),(37,'as',1),(38,'as',1),(39,'demo',1),(40,'demo',1),(41,'demo',1),(42,'Categoria demo',1),(43,'Categoria demo',1);
 /*!40000 ALTER TABLE `categoria_servicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -39,6 +40,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'jg17','jaasiel','124343',NULL,'demo',1,'2021-10-18','23:49:53',1),(2,'jg18','jaasiel','124343',NULL,'demo',1,'2021-10-19','00:21:56',1),(3,'jg19','jaasiel','124343',NULL,'demo',1,'2021-10-19','00:22:02',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,6 +60,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `estante` WRITE;
 /*!40000 ALTER TABLE `estante` DISABLE KEYS */;
+INSERT INTO `estante` VALUES (1,'demo ubicacin',2,1),(2,'demo ubicacin',2,1),(3,'demo ubicacin',2,1);
 /*!40000 ALTER TABLE `estante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,6 +79,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `inventario_repuesto` WRITE;
 /*!40000 ALTER TABLE `inventario_repuesto` DISABLE KEYS */;
+INSERT INTO `inventario_repuesto` VALUES (1,'resitencia ceramica',10,50,1,'2021-10-18','1970-01-01',2,2,4,1);
 /*!40000 ALTER TABLE `inventario_repuesto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,6 +175,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `ubicacion` WRITE;
 /*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
+INSERT INTO `ubicacion` VALUES (1,'demo ubicacin',1),(2,'demo ubicacin',1),(3,'demo ubicacin',1);
 /*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-15 23:19:10
+-- Dump completed on 2021-10-19  0:25:14

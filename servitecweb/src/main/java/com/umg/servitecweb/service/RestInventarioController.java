@@ -59,7 +59,7 @@ public class RestInventarioController {
 		return cajaRepo.save(c);
 	}
 
-	@PostMapping("/cajas/{id}")
+	@PutMapping("/cajas/{id}")
 	public Caja actualizarCaja(@RequestBody Caja c, @PathVariable Integer id) {
 		return cajaRepo.findById(id).map(c1 -> {
 			c1.setDescripcion(c.getDescripcion());
@@ -109,7 +109,7 @@ public class RestInventarioController {
 		return e1;
 	}
 
-	@PostMapping("/estantes/{id}")
+	@PutMapping("/estantes/{id}")
 	public Estante actualizarEstante(@RequestBody Estante e, @PathVariable Integer id) {
 		return estanteRepo.findById(id).map(e1 -> {
 			e1.setDescripcion(e.getDescripcion());

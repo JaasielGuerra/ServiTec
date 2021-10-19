@@ -70,7 +70,7 @@ public class RestMotivosOrdenController {
 		return motivos;
 	}
 
-	@GetMapping("/[id")
+	@GetMapping("/{id}")
 	public MotivoOrden obtener(@PathVariable Integer id) {
 
 		MotivoOrden m = repo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));

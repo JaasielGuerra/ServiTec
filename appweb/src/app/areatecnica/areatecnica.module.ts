@@ -18,10 +18,15 @@ import { ServiciostecnicosService } from "./service/serviciostecnicos.service";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { CategoriaservicioService } from "./service/categoriaservicio.service";
-import { EditarserviciotecnicoComponent } from './serviciostecnicos/editarserviciotecnico/editarserviciotecnico.component';
-import { CatalogosinventarioComponent } from './inventariorepuestos/catalogosinventario/catalogosinventario.component';
-import { AgregarinventarioComponent } from './inventariorepuestos/agregarinventario/agregarinventario.component';
-import { AjustarinventarioComponent } from './inventariorepuestos/ajustarinventario/ajustarinventario.component';
+import { EditarserviciotecnicoComponent } from "./serviciostecnicos/editarserviciotecnico/editarserviciotecnico.component";
+import { CatalogosinventarioComponent } from "./inventariorepuestos/catalogosinventario/catalogosinventario.component";
+import { AgregarinventarioComponent } from "./inventariorepuestos/agregarinventario/agregarinventario.component";
+import { AjustarinventarioComponent } from "./inventariorepuestos/ajustarinventario/ajustarinventario.component";
+import { InventarioService } from "./service/inventario.service";
+import { EstanteService } from "./service/estante.service";
+import { CajaService } from "./service/caja.service";
+import { UbicacionService } from "./service/ubicacion.service";
+import { EditarrepuestoComponent } from './inventariorepuestos/editarrepuesto/editarrepuesto.component';
 
 @NgModule({
   declarations: [
@@ -40,14 +45,22 @@ import { AjustarinventarioComponent } from './inventariorepuestos/ajustarinventa
     CatalogosinventarioComponent,
     AgregarinventarioComponent,
     AjustarinventarioComponent,
+    EditarrepuestoComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [ServiciostecnicosService, CategoriaservicioService],
+  providers: [
+    ServiciostecnicosService,
+    CategoriaservicioService,
+    InventarioService,
+    EstanteService,
+    CajaService,
+    UbicacionService,
+  ],
 })
 export class AreatecnicaModule {}

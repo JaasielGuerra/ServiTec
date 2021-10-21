@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Categoria } from "../model/Categoria";
+import { HttpClientHelper } from "../../baseURL";
 
 @Injectable({
   providedIn: "root",
 })
 export class CategoriaservicioService {
   urlCategorias =
-    "http://192.168.1.20:8080/servitec/serviciostecnicos/categorias";
+    `${HttpClientHelper.baseURL}/serviciostecnicos/categorias`;
 
   constructor(private http: HttpClient) {}
 

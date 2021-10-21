@@ -12,4 +12,5 @@ import com.umg.servitecweb.model.Ubicacion;
 public interface IInventarioRepo extends JpaRepository<InventarioRepuesto, Long>{
 	public List<InventarioRepuesto> findByEstado(Integer e);
 	public List<InventarioRepuesto> findByEstadoAndEstanteAndUbicacionAndCaja(Integer e, Estante es, Ubicacion u, Caja c);
+	public List<InventarioRepuesto> findByEstanteAndUbicacionAndCaja(Estante es, Ubicacion u, Caja c);
 }

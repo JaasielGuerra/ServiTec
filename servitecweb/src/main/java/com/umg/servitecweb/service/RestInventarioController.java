@@ -158,7 +158,7 @@ public class RestInventarioController {
 		return ubicacionRepo.save(u);
 	}
 
-	@PostMapping("/ubicaciones/{id}")
+	@PutMapping("/ubicaciones/{id}")
 	public Ubicacion actualizarUbicacion(@RequestBody Ubicacion u, @PathVariable Integer id) {
 		return ubicacionRepo.findById(id).map(ub -> {
 			ub.setDescripcion(u.getDescripcion());
@@ -269,9 +269,21 @@ public class RestInventarioController {
 		});
 	}
 
+	@PutMapping("/{id}/cambiarestado")
+	public InventarioRepuesto cambiarEstadp(@PathVariable Long id, @RequestBody Integer estado) {
+
+		return inventarioRepo.findById(id).map(i -> {
+
+			i.setEstado(estado);
+
+			log.info("repuesto actualizado");
+
+			return inventarioRepo.save(i);
+		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+	}
+
 	@GetMapping
 	public List<InventarioRepuesto> consultar(
-			@RequestParam(value = "status", defaultValue = "1", required = false) Integer status,
 			@RequestParam(value = "estante", defaultValue = "1", required = false) Integer estante,
 			@RequestParam(value = "ubicacion", defaultValue = "1", required = false) Integer ubicacion,
 			@RequestParam(value = "caja", defaultValue = "1", required = false) Integer caja) {
@@ -282,7 +294,7 @@ public class RestInventarioController {
 		Ubicacion u = ubicacionRepo.findById(ubicacion)
 				.orElseThrow(() -> new RecursoNoEncontradoException(ubicacion.toString()));
 
-		List<InventarioRepuesto> l = inventarioRepo.findByEstadoAndEstanteAndUbicacionAndCaja(status, e, u, c);
+		List<InventarioRepuesto> l = inventarioRepo.findByEstanteAndUbicacionAndCaja(e, u, c);
 		return l;
 	}
 
@@ -302,18 +314,15 @@ public class RestInventarioController {
 	}
 
 	@PutMapping("/{id}/ajustarexistencia")
-	public InventarioRepuesto ajustar(@PathVariable Long id,
-			@RequestParam(value = "existencia", required = true) Integer existencia) {
+	public InventarioRepuesto ajustar(@PathVariable Long id, @RequestBody Integer existencia) {
 		return inventarioRepo.findById(id).map(i -> {
 			i.setExistencia(existencia);
 			return inventarioRepo.save(i);
 		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
 	}
-	
 
 	@PutMapping("/{id}/agregarexistencia")
-	public InventarioRepuesto agrgar(@PathVariable Long id,
-			@RequestParam(value = "cantidad", required = true) Integer cantidad) {
+	public InventarioRepuesto agrgar(@PathVariable Long id, @RequestBody Integer cantidad) {
 		return inventarioRepo.findById(id).map(i -> {
 			i.setExistencia(i.getExistencia() + cantidad);
 			return inventarioRepo.save(i);

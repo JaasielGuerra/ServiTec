@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Caja } from "../../model/Caja";
 import { Estante } from "../../model/Estante";
@@ -11,12 +11,12 @@ import { InventarioService } from "../../service/inventario.service";
 import { UbicacionService } from "../../service/ubicacion.service";
 
 @Component({
-  selector: "app-nuevorepuesto",
-  templateUrl: "./nuevorepuesto.component.html",
-  styleUrls: ["./nuevorepuesto.component.css"],
+  selector: "app-editarrepuesto",
+  templateUrl: "./editarrepuesto.component.html",
+  styleUrls: ["./editarrepuesto.component.css"],
 })
-export class NuevorepuestoComponent implements OnInit {
-  repuesto: InventarioRepuesto;
+export class EditarrepuestoComponent implements OnInit {
+  repuesto: InventarioRepuesto = new InventarioRepuesto();
   estantes: Estante[];
   ubicaciones: Ubicacion[];
   cajas: Caja[];
@@ -31,19 +31,29 @@ export class NuevorepuestoComponent implements OnInit {
     private ubicaionService: UbicacionService,
     private rutas: Router,
     private toastr: ToastrService,
-    private service: InventarioService
+    private service: InventarioService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.repuesto = new InventarioRepuesto();
-    this.repuesto.estado = 1;
+    const id = this.activatedRoute.snapshot.params.id;
+    this.service.obtener(id).subscribe(
+      (data) => {
+        this.repuesto = data;
+        this.idCajaSel = this.repuesto.caja.idCaja;
+        this.idEstanteSel = this.repuesto.estante.idEstante;
+        this.idUbicacionSel = this.repuesto.ubicacion.idUbicacion;
+      },
+      (err) => {
+        console.log(err.message);
+
+        this.rutas.navigate(["/notfound"]);
+      }
+    );
     this.initSelect();
   }
-  initSelect() {
-    this.idEstanteSel = 1;
-    this.idUbicacionSel = 1;
-    this.idCajaSel = 1;
 
+  initSelect() {
     this.estanteService.listar("1").subscribe(
       (data) => {
         this.estantes = data;
@@ -72,18 +82,17 @@ export class NuevorepuestoComponent implements OnInit {
 
   guardar() {
     this.service
-      .crearRepuesto(
+      .actualizarRepuesto(
         this.repuesto,
         this.idCajaSel.toString(),
         this.idEstanteSel.toString(),
-        this.idUbicacionSel.toString(),
-        "1"
+        this.idUbicacionSel.toString()
       )
       .subscribe(
         (data) => {
           this.rutas.navigate(["inventario-repuestos"]);
           this.toastr.success(
-            '<span class="now-ui-icons ui-1_bell-53"></span> Ha sido registrado!',
+            '<span class="now-ui-icons ui-1_bell-53"></span> Ha sido actualizado!',
             "Éxito!",
             {
               closeButton: true,

@@ -28,6 +28,7 @@ import { AtenderordenComponent } from "../../taller/atenderordenes/atenderorden/
 import { ConsultarordenescobrarComponent } from "../../taller/cobroservicios/consultarordenescobrar/consultarordenescobrar.component";
 import { ConsultarservicioscobradosComponent } from "../../taller/cobroservicios/consultarservicioscobrados/consultarservicioscobrados.component";
 import { CobrarservicioComponent } from "../../taller/cobroservicios/cobrarservicio/cobrarservicio.component";
+import { EditarrepuestoComponent } from "../../areatecnica/inventariorepuestos/editarrepuesto/editarrepuesto.component";
 
 /**
  * Configuracion de rutas para navegacion de la aplicacion del menu principal
@@ -53,6 +54,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "personal-tecnico/crear", component: RegistrarpersonalComponent },
   { path: "inventario-repuestos", component: ConsultainventarioComponent },
   { path: "inventario-repuestos/nuevo", component: NuevorepuestoComponent },
+  { path: "inventario-repuestos/editar/:id", component: EditarrepuestoComponent },
   { path: "inventario-repuestos/agregar/:id", component: AgregarinventarioComponent },
   { path: "inventario-repuestos/ajustar/:id", component: AjustarinventarioComponent },
   { path: "inventario-repuestos/catalogos", component: CatalogosinventarioComponent },

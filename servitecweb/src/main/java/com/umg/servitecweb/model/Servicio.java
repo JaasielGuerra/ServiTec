@@ -57,7 +57,7 @@ public class Servicio implements Serializable {
 	private CategoriaServicio categoriaServicio;
 
 	// bi-directional many-to-one association to Usuario
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 

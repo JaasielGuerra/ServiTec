@@ -6,7 +6,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Registrar repuesto</h5>
+          <h5 class="title">Editar repuesto</h5>
         </div>
         <div class="card-body">
           <form (ngSubmit)="guardar()" #f="ngForm" novalidate>
@@ -27,22 +27,9 @@
                     name="precio">
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label>Cantidad</label>
-                  <input type="number" class="form-control" placeholder="Cantidad" required
-                    [(ngModel)]="repuesto.existencia" name="existencia">
-                </div>
-              </div>
+
             </div>
             <div class="row">
-              <div class="col-md-2 form-group">
-                <label>Registrar con estado</label>
-                <select class="form-control" required [(ngModel)]="repuesto.estado" name="estado">
-                  <option value="{{1}}">Activo</option>
-                  <option value="{{0}}">Inactivo</option>
-                </select>
-              </div>
               <div class="col-md-3 form-group">
                 <label>Estante</label>
                 <select class="form-control form-control-sm" [(ngModel)]="idEstanteSel" name="idEstanteSel">

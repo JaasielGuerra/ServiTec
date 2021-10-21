@@ -9,12 +9,12 @@
           <h5 class="title">Ajustar inventario</h5>
         </div>
         <div class="card-body">
-          <form>
+          <form (ngSubmit)="ajustar()" #f="ngForm">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Repuesto seleccionado</label>
-                  <input type="text" class="form-control" disabled value="demo">
+                  <input type="text" class="form-control" disabled [value]="descripcion">
                 </div>
               </div>
             </div>
@@ -22,20 +22,20 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Cantidad actual</label>
-                  <input type="number" class="form-control" disabled value="10">
+                  <input type="number" class="form-control" disabled [value]="actual">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label>Nueva cantidad</label>
-                  <input type="number" class="form-control" placeholder="Cantidad" required>
+                  <input type="number" class="form-control" placeholder="Cantidad" required [(ngModel)]="nueva" name="nueva">
                 </div>
               </div>
             </div>
 
             <hr>
             <a class="btn btn-default" routerLink="/inventario-repuestos">Regresar a consultar inventario</a>
-            <button class="btn btn-success">Ajustar</button>
+            <button class="btn btn-success" [disabled]="(!f.valid)">Ajustar</button>
           </form>
         </div>
       </div>

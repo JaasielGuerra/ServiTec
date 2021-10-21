@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ServicioTecnico } from "../model/ServicioTecnico";
+import { HttpClientHelper } from "../../baseURL";
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +9,7 @@ import { ServicioTecnico } from "../model/ServicioTecnico";
 export class ServiciostecnicosService {
   constructor(private http: HttpClient) {}
 
-  urlServicios = "http://192.168.1.20:8080/servitec/serviciostecnicos";
+  urlServicios = `${HttpClientHelper.baseURL}/serviciostecnicos`;
 
   getServiciosTecnitos(estado: string) {
     let p = new HttpParams({ fromObject: { status: estado } });

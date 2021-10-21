@@ -8,18 +8,18 @@
   </div>
   <div class="modal-body">
 
-    <form novalidate #f="ngForm">
+    <form novalidate #f="ngForm" (ngSubmit)="guardar()">
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
             <label>Descripción</label>
-            <input type="text" class="form-control" placeholder="Requerido" required>
+            <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="caja.descripcion" name="descripcion">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label>Número</label>
-            <input type="number" class="form-control" placeholder="Numero" required >
+            <input type="number" class="form-control" placeholder="Numero" required [(ngModel)]="caja.numero" name="numero">
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
   <div class="card-body">
     <h6 class="card-title">Cajas</h6>
 
-    <button class="btn btn-success" type="button" (click)="nuevaCaja(modalFormCaja)">Nueva caja</button>
+    <button class="btn btn-success" type="button" (click)="nuevo(modalFormCaja)">Nueva caja</button>
 
     <div class="table-responsive">
       <table class="table">
@@ -47,14 +47,14 @@
           <th>Número</th>
           <th>Operaciones</th>
         </thead>
-        <tbody >
+        <tbody *ngFor="let c of cajas">
           <tr>
-            <td>{{1}}</td>
-            <td>{{'demo'}}</td>
-            <td>{{12}}</td>
+            <td>{{c.idCaja}}</td>
+            <td>{{c.descripcion}}</td>
+            <td>{{c.numero}}</td>
             <td>
-              <button type="button" class="btn btn-warning btn-sm btn-round" >Editar</button>
-              <button type="button" class="btn btn-danger btn-sm btn-round" >Eliminar</button>
+              <button type="button" class="btn btn-warning btn-sm btn-round" (click)="editar(c, modalFormCaja)">Editar</button>
+              <button type="button" class="btn btn-danger btn-sm btn-round" (click)="eliminar(c.idCaja)">Eliminar</button>
             </td>
           </tr>
         </tbody>

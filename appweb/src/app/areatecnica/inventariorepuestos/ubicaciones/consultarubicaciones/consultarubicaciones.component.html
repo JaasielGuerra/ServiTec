@@ -8,12 +8,12 @@
   </div>
   <div class="modal-body">
 
-    <form novalidate #f="ngForm">
+    <form novalidate #f="ngForm" (ngSubmit)="guardar()">
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
             <label>Descripción</label>
-            <input type="text" class="form-control" placeholder="Requerido" required>
+            <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="ubicacion.descripcion" name="descripcion">
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
   <div class="card-body">
     <h6 class="card-title">Ubicaciones</h6>
 
-    <button class="btn btn-success" type="button" (click)="nuevaUbicacion(modalFormUbicacion)">Nuevo ubicacion</button>
+    <button class="btn btn-success" type="button" (click)="nuevo(modalFormUbicacion)">Nuevo ubicacion</button>
 
     <div class="table-responsive">
       <table class="table">
@@ -40,13 +40,13 @@
           <th>Descripción</th>
           <th>Operaciones</th>
         </thead>
-        <tbody >
+        <tbody *ngFor="let u of ubicaciones">
           <tr>
-            <td>{{1}}</td>
-            <td>{{'demo'}}</td>
+            <td>{{u.idUbicacion}}</td>
+            <td>{{u.descripcion}}</td>
             <td>
-              <button type="button" class="btn btn-warning btn-sm btn-round" >Editar</button>
-              <button type="button" class="btn btn-danger btn-sm btn-round" >Eliminar</button>
+              <button type="button" class="btn btn-warning btn-sm btn-round" (click)="editar(u, modalFormUbicacion)">Editar</button>
+              <button type="button" class="btn btn-danger btn-sm btn-round" (click)="eliminar(u.idUbicacion)">Eliminar</button>
             </td>
           </tr>
         </tbody>

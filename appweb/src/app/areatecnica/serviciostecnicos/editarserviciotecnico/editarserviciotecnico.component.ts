@@ -13,7 +13,7 @@ import { CategoriaservicioService } from "../../service/categoriaservicio.servic
   styleUrls: ["./editarserviciotecnico.component.css"],
 })
 export class EditarserviciotecnicoComponent implements OnInit {
-  servicioTecnicoEditar: ServicioTecnico = null;
+  servicioTecnicoEditar: ServicioTecnico = new ServicioTecnico();
   categorias: Categoria[];
   idCatSeleccionada: number = -1;
   categoriaModel = new Categoria();

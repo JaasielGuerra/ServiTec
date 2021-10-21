@@ -11,31 +11,31 @@
           <a class="btn btn-info" routerLink="/inventario-repuestos/catalogos">Catalogos</a>
 
 
-          <form>
+
+
             <div class="row">
               <div class="col-md-2">
                 <label>Estante</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
+                <select class="form-control form-control-sm" (change)="consultarInventario()"
+                  [(ngModel)]="idEstanteSel">
+                  <option *ngFor="let e of estantes" [value]="e.idEstante">{{e.descripcion}} {{e.numero}}</option>
                 </select>
               </div>
               <div class="col-md-2">
                 <label>Ubicacion</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
+                <select class="form-control form-control-sm" (change)="consultarInventario()"
+                  [(ngModel)]="idUbicacionSel">
+                  <option *ngFor="let u of ubicaciones" [value]="u.idUbicacion">{{u.descripcion}}</option>
                 </select>
               </div>
               <div class="col-md-2">
                 <label>Caja</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
+                <select class="form-control form-control-sm" (change)="consultarInventario()" [(ngModel)]="idCajaSel">
+                  <option *ngFor="let c of cajas" [value]="c.idCaja">{{c.descripcion}} {{c.numero}}</option>
                 </select>
               </div>
-              <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
-              </div>
+
             </div>
-          </form>
 
           <div class="table-responsive">
             <table class="table">
@@ -54,21 +54,24 @@
                 <th>Estado</th>
                 <th>Operaciones</th>
               </thead>
-              <tbody>
+              <tbody *ngFor="let i of inventario">
                 <tr>
-                  <td>1</td>
-                  <td>demo</td>
-                  <td class="text-right">123</td>
-                  <td class="text-center">12</td>
-                  <td>asds</td>
-                  <td>asds</td>
-                  <td>asds</td>
-                  <td>asds</td>
+                  <td>{{i.idInventarioRepuesto}}</td>
+                  <td>{{i.descripcion}}</td>
+                  <td class="text-right">{{i.precio}}</td>
+                  <td class="text-center">{{i.existencia}}</td>
+                  <td>{{i.estante.descripcion}}</td>
+                  <td>{{i.ubicacion.descripcion}}</td>
+                  <td>{{i.caja.descripcion}}</td>
                   <td>
-                    <a class="btn btn-warning btn-sm btn-round">Editar</a>
-                    <button type="button" class="btn btn-danger btn-sm btn-round">Desactivar</button>
-                    <button type="button" class="btn btn-primary btn-sm btn-round">Activar</button>
-                    <a class="btn btn-success btn-sm btn-round"  routerLink="/inventario-repuestos/agregar/1">Agregar</a>
+                    <span *ngIf="i.estado == 0" class="badge badge-danger">Desactivado</span>
+                    <span *ngIf="i.estado == 1" class="badge badge-success">Activado</span>
+                  </td>
+                  <td>
+                    <a class="btn btn-warning btn-sm btn-round" routerLink="/inventario-repuestos/editar/{{i.idInventarioRepuesto}}">Editar</a>
+                    <button type="button" *ngIf="i.estado == 1" class="btn btn-danger btn-sm btn-round" (click)="desactivar(i.idInventarioRepuesto)">Desactivar</button>
+                    <button type="button" *ngIf="i.estado == 0" class="btn btn-primary btn-sm btn-round" (click)="activar(i.idInventarioRepuesto)">Activar</button>
+                    <a class="btn btn-success btn-sm btn-round" routerLink="/inventario-repuestos/agregar/1">Agregar</a>
                     <a class="btn btn-info btn-sm btn-round" routerLink="/inventario-repuestos/ajustar/1">Ajustar</a>
                   </td>
                 </tr>

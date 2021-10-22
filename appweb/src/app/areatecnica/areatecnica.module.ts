@@ -26,7 +26,9 @@ import { InventarioService } from "./service/inventario.service";
 import { EstanteService } from "./service/estante.service";
 import { CajaService } from "./service/caja.service";
 import { UbicacionService } from "./service/ubicacion.service";
-import { EditarrepuestoComponent } from './inventariorepuestos/editarrepuesto/editarrepuesto.component';
+import { EditarrepuestoComponent } from "./inventariorepuestos/editarrepuesto/editarrepuesto.component";
+import { TecnicosService } from "./service/tecnicos.service";
+import { UsuariosService } from "../administracion/service/usuarios.service";
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { EditarrepuestoComponent } from './inventariorepuestos/editarrepuesto/ed
     EstanteService,
     CajaService,
     UbicacionService,
+    TecnicosService,
+    UsuariosService
   ],
 })
 export class AreatecnicaModule {}

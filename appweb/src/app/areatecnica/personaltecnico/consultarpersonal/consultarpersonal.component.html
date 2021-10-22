@@ -7,7 +7,7 @@
           <h4 class="card-title">Personal técnico registrado</h4>
         </div>
         <div class="card-body">
-          <a class="btn btn-success" routerLink="/personal-tecnico/crear" >Nuevo Personal</a>
+          <a class="btn btn-success" routerLink="/personal-tecnico/crear">Nuevo Personal</a>
 
           <div class="table-responsive">
             <table class="table">
@@ -17,15 +17,21 @@
                 <th>Estado</th>
                 <th>Operaciones</th>
               </thead>
-              <tbody >
+              <tbody *ngFor="let t of tecnicos">
                 <tr>
-                  <td>1</td>
-                  <td>asds</td>
-                  <td>asds</td>
+                  <td>{{t.idTecnico}}</td>
+                  <td>{{t.nombreCompleto}}</td>
                   <td>
-                    <a  class="btn btn-warning btn-sm btn-round">Editar</a>
-                    <button type="button" class="btn btn-danger btn-sm btn-round">Desactivar</button>
-                    <button type="button" class="btn btn-primary btn-sm btn-round">Activar</button>
+                    <span *ngIf="t.estado" class="badge badge-success">Activo</span>
+                    <span *ngIf="!t.estado" class="badge badge-danger">Inactivo</span>
+                  </td>
+                  <td>
+                    <a class="btn btn-warning btn-sm btn-round"
+                      routerLink="/personal-tecnico/editar/{{t.idTecnico}}">Editar</a>
+                    <button type="button" *ngIf="t.estado" class="btn btn-danger btn-sm btn-round"
+                      (click)="desactivar(t.idTecnico)">Desactivar</button>
+                    <button type="button" *ngIf="!t.estado" class="btn btn-primary btn-sm btn-round"
+                      (click)="activar(t.idTecnico)">Activar</button>
                   </td>
                 </tr>
               </tbody>

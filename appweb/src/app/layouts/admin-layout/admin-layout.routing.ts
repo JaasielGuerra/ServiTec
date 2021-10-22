@@ -29,6 +29,7 @@ import { ConsultarordenescobrarComponent } from "../../taller/cobroservicios/con
 import { ConsultarservicioscobradosComponent } from "../../taller/cobroservicios/consultarservicioscobrados/consultarservicioscobrados.component";
 import { CobrarservicioComponent } from "../../taller/cobroservicios/cobrarservicio/cobrarservicio.component";
 import { EditarrepuestoComponent } from "../../areatecnica/inventariorepuestos/editarrepuesto/editarrepuesto.component";
+import { EditarpersonalComponent } from "../../areatecnica/personaltecnico/editarpersonal/editarpersonal.component";
 
 /**
  * Configuracion de rutas para navegacion de la aplicacion del menu principal
@@ -38,26 +39,57 @@ export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "ordenes-servicio", component: ConsultarordenesservicioComponent },
   { path: "ordenes-servicio/crear", component: CrearordenservicioComponent },
-  { path: "ordenes-servicio/catalogo-motivos", component: CatalogomotivosComponent },
+  {
+    path: "ordenes-servicio/catalogo-motivos",
+    component: CatalogomotivosComponent,
+  },
   { path: "atender-ordenes", component: ConsultarordenesatenderComponent },
   { path: "atender-ordenes/atender/:id", component: AtenderordenComponent },
   { path: "cobro-servicios", component: ConsultarordenescobrarComponent },
-  { path: "cobro-servicios/cobros", component: ConsultarservicioscobradosComponent },
+  {
+    path: "cobro-servicios/cobros",
+    component: ConsultarservicioscobradosComponent,
+  },
   { path: "cobro-servicios/cobrar/:id", component: CobrarservicioComponent },
   { path: "clientes", component: ConsultarclientesComponent },
   { path: "clientes/crear", component: CrearclienteComponent },
-  { path: "servicios-tecnicos", component: ConsultarserviciostecnicosComponent },
-  { path: 'servicios-tecnicos/categorias', component: ConsultarcatalogocategoriasComponent },
-  { path: 'servicios-tecnicos/nuevo', component: CrearserviciotecnicoComponent },
-  { path: 'servicios-tecnicos/editar/:id', component: EditarserviciotecnicoComponent },
+  {
+    path: "servicios-tecnicos",
+    component: ConsultarserviciostecnicosComponent,
+  },
+  {
+    path: "servicios-tecnicos/categorias",
+    component: ConsultarcatalogocategoriasComponent,
+  },
+  {
+    path: "servicios-tecnicos/nuevo",
+    component: CrearserviciotecnicoComponent,
+  },
+  {
+    path: "servicios-tecnicos/editar/:id",
+    component: EditarserviciotecnicoComponent,
+  },
   { path: "personal-tecnico", component: ConsultarpersonalComponent },
   { path: "personal-tecnico/crear", component: RegistrarpersonalComponent },
+  { path: "personal-tecnico/editar/:id", component: EditarpersonalComponent },
   { path: "inventario-repuestos", component: ConsultainventarioComponent },
   { path: "inventario-repuestos/nuevo", component: NuevorepuestoComponent },
-  { path: "inventario-repuestos/editar/:id", component: EditarrepuestoComponent },
-  { path: "inventario-repuestos/agregar/:id", component: AgregarinventarioComponent },
-  { path: "inventario-repuestos/ajustar/:id", component: AjustarinventarioComponent },
-  { path: "inventario-repuestos/catalogos", component: CatalogosinventarioComponent },
+  {
+    path: "inventario-repuestos/editar/:id",
+    component: EditarrepuestoComponent,
+  },
+  {
+    path: "inventario-repuestos/agregar/:id",
+    component: AgregarinventarioComponent,
+  },
+  {
+    path: "inventario-repuestos/ajustar/:id",
+    component: AjustarinventarioComponent,
+  },
+  {
+    path: "inventario-repuestos/catalogos",
+    component: CatalogosinventarioComponent,
+  },
   { path: "usuarios", component: ConsultarusuariosComponent },
   { path: "usuarios/roles", component: ConsultarrolesComponent },
   { path: "usuarios/nuevo", component: CrearusuarioComponent },

@@ -5,9 +5,12 @@ import { ConsultarusuariosComponent } from "./usuarios/consultarusuarios/consult
 import { CrearusuarioComponent } from "./usuarios/crearusuario/crearusuario.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
-import { ConsultarrolesComponent } from './usuarios/roles/consultarroles/consultarroles.component';
+import { ConsultarrolesComponent } from "./usuarios/roles/consultarroles/consultarroles.component";
 import { RouterModule } from "@angular/router";
 import { AdminLayoutRoutes } from "../layouts/admin-layout/admin-layout.routing";
+import { UsuariosService } from "./service/usuarios.service";
+import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,6 +19,13 @@ import { AdminLayoutRoutes } from "../layouts/admin-layout/admin-layout.routing"
     CrearusuarioComponent,
     ConsultarrolesComponent,
   ],
-  imports: [CommonModule, NgbModule, FormsModule, RouterModule.forChild(AdminLayoutRoutes)],
+  imports: [
+    CommonModule,
+    NgbModule,
+    FormsModule,
+    RouterModule.forChild(AdminLayoutRoutes),
+    HttpClientModule
+  ],
+  providers: [UsuariosService],
 })
 export class AdministracionModule {}

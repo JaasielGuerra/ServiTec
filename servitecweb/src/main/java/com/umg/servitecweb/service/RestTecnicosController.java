@@ -55,7 +55,7 @@ public class RestTecnicosController {
 		Usuario u = usuarioRepo.findById(idUser).orElseThrow(() -> new RecursoNoEncontradoException(idUser.toString()));
 
 		t.setUsuario(u);
-		t.setEstado(1);
+		//t.setEstado(1);
 		t.setFechaCommit(Date.valueOf(LocalDate.now()));
 		t.setHoraCommit(Time.valueOf(LocalTime.now()));
 
@@ -66,9 +66,14 @@ public class RestTecnicosController {
 
 	@GetMapping
 	public List<Tecnico> consultar(
-			@RequestParam(value = "status", defaultValue = "1", required = false) Integer status) {
+			@RequestParam(value = "status", defaultValue = "-1", required = false) Integer status) {
 
-		List<Tecnico> l = tecnicoRepo.findByEstado(status);
+		List<Tecnico> l = null;
+		if (status == -1) {
+			l = tecnicoRepo.findAll();
+		} else {
+			l = tecnicoRepo.findByEstado(status);
+		}
 
 		return l;
 	}
@@ -131,6 +136,22 @@ public class RestTecnicosController {
 		Collection<EstadoOrden> e = estadoOrdenRepo.findByIdEstadoOrdenIn(Arrays.asList(1, 2, 3));
 
 		return ordenRepo.countByTecnicoAndEstadoOrdenIn(t, e);
+	}
+
+	@PutMapping("/{id}/cambiarestado")
+	public Tecnico cambiarEstado( @PathVariable Integer id , 	@RequestBody Integer estado) {
+
+		Tecnico tecnico = tecnicoRepo.findById(id).map(te -> {
+
+			te.setEstado(estado);
+
+			return tecnicoRepo.save(te);
+
+		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+
+		log.info("tecnico actualizado con exito");
+
+		return tecnico;
 	}
 
 }

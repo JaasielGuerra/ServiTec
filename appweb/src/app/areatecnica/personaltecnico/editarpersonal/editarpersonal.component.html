@@ -1,1 +1,46 @@
-<p>editarpersonal works!</p>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Editar personal</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="guardar()" #form="ngForm" novalidate>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nombre completo</label>
+                  <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="tecnico.nombreCompleto" name="nombreCompleto">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 form-group">
+                <label>Asignar usuario</label>
+                <select class="form-control" required [(ngModel)]="idUsuarioSel" name="idUsuarioSel">
+                  <option *ngFor="let u of usuarios" [value]="u.idUsuario">{{u.nombre}}</option>
+                </select>
+              </div>
+              <div class="col-md-3 d-flex align-items-end">
+                <button type="button" class="btn btn-info btn-round"><i class="fa fa-plus"></i>Nuevo</button>
+              </div>
+            </div>
+
+            <hr>
+
+            <a class="btn btn-default" routerLink="/personal-tecnico">Regresar a consultar personal</a>
+            <button type="submit" [disabled]="!form.form.valid" class="btn btn-success">Guardar</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

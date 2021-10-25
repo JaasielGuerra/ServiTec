@@ -6,10 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * The persistent class for the orden database table.
- * 
- */
 @Entity
 @Table(name="orden")
 @NamedQuery(name="Orden.findAll", query="SELECT o FROM Orden o")
@@ -17,9 +13,9 @@ public class Orden implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_orden")
-	private long idOrden;
+	private String idOrden;
 
 	private int aplicable;
 
@@ -58,8 +54,9 @@ public class Orden implements Serializable {
 	@Column(name="hora_commit")
 	private Date horaCommit;
 
-	@Column(name="imagen_referencia")
-	private String imagenReferencia;
+	@Lob
+	@Column(name="imagen_referencia", length = 65535)
+	private byte[] imagenReferencia;
 
 	@Column(name="total_costo_servicio")
 	private double totalCostoServicio;
@@ -109,11 +106,11 @@ public class Orden implements Serializable {
 	public Orden() {
 	}
 
-	public long getIdOrden() {
+	public String getIdOrden() {
 		return this.idOrden;
 	}
 
-	public void setIdOrden(long idOrden) {
+	public void setIdOrden(String idOrden) {
 		this.idOrden = idOrden;
 	}
 
@@ -205,11 +202,11 @@ public class Orden implements Serializable {
 		this.horaCommit = horaCommit;
 	}
 
-	public String getImagenReferencia() {
+	public byte[] getImagenReferencia() {
 		return this.imagenReferencia;
 	}
 
-	public void setImagenReferencia(String imagenReferencia) {
+	public void setImagenReferencia(byte[] imagenReferencia) {
 		this.imagenReferencia = imagenReferencia;
 	}
 

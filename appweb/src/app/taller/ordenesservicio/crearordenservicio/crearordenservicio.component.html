@@ -2,6 +2,26 @@
 </div>
 <div class="main-content">
 
+  <ng-template #modalImagen let-modal>
+
+    <div class="modal-header">
+      <h4 class="title" id="modal-basic-title">Seleccionar</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <input type="file" class="form-control-file" id="imagen" (change)="onFileChanged($event)" maxlength="65535"
+        accept=".jpg">
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
+      <button type="button" [disabled]="!selectedFile" class="btn btn-success" (click)="seleccionarImagen()">Aceptar</button>
+    </div>
+  </ng-template>
+
   <ng-template #disponibilidad let-modal>
 
     <div class="modal-header">
@@ -17,13 +37,13 @@
           <label class="font-italic font-weight-bold">Técnico: </label>
         </div>
         <div class="col-md-9">
-          <label class="font-italic">Nombre</label>
+          <label class="font-italic">{{ordenServicio.tecnico.nombreCompleto}}</label>
         </div>
         <div class="col-md-3">
           <label class="font-italic font-weight-bold">Trabajos: </label>
         </div>
         <div class="col-md-9">
-          <label class="font-italic text-info">10</label>
+          <label class="font-italic text-info">{{disponibilidadTecnico}}</label>
         </div>
       </div>
 
@@ -40,7 +60,7 @@
           <h5 class="title">Crear orden</h5>
         </div>
         <div class="card-body">
-          <form>
+          <form (ngSubmit)="crearOrden()" #form="ngForm" novalidate>
             <h5>Datos de la orden</h5>
             <div class="row">
               <div class="col-md-8">
@@ -48,7 +68,8 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Descripcion orden</label>
-                      <input type="text" class="form-control" value="demo">
+                      <input type="text" class="form-control" required [(ngModel)]="ordenServicio.descripcionOrden"
+                        name="descripcionOrden">
                     </div>
                   </div>
                 </div>
@@ -56,46 +77,50 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Descripcion recibido</label>
-                      <input type="text" class="form-control" value="demo">
+                      <input type="text" class="form-control" required [(ngModel)]="ordenServicio.descripcionRecibido"
+                        name="descripcionRecibido">
                     </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label>Motivo</label>
+                    <select class="form-control" [(ngModel)]="ordenServicio.motivoOrden.idMotivoOrden"
+                      name="idMotivoOrden" required>
+                      <option *ngFor="let m of motivos" [value]="m.idMotivoOrden">{{m.descripcion}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <label>Fecha ingreso</label>
+                    <input type="date" class="form-control" [(ngModel)]="ordenServicio.fechaIngreso" name="fechaIngreso"
+                      required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label>Fecha máxima a entregar</label>
+                    <input type="date" class="form-control" [(ngModel)]="ordenServicio.fechaMaximaEntrega"
+                      name="fechaMaximaEntrega" required>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
-                <div class="form-group">
-                  <label for="imagen">Imagen de referencia</label>
-                  <input type="file" class="form-control-file" id="imagen">
+                <div class="card w-50">
+                  <img [src]="url" *ngIf="url" class="card-img-top">
+                  <div class="card-body">
+                    <p class="card-text" [ngClass]="{'text-danger': !url, 'text-success': url}">{{msjImagen}}</p>
+                    <button type="button" class="btn btn-info" (click)="modalSeleccionarImg(modalImagen)">Seleccionar
+                      imagen</button>
+                  </div>
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <label>Motivo</label>
-                <select class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 form-group">
-                <label>Fecha ingreso</label>
-                <input type="date" class="form-control">
-              </div>
-              <div class="col-md-4 form-group">
-                <label>Fecha máxima a entregar</label>
-                <input type="date" class="form-control">
-              </div>
-            </div>
-
             <h5>Asignaciones</h5>
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>Prioridad</label>
-                <select class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                <select class="form-control" [(ngModel)]="ordenServicio.prioridad.idPrioridad" name="idPrioridad" required>
+                  <option *ngFor="let p of prioridades" [value]="p.idPrioridad">{{p.descripcion}}</option>
                 </select>
               </div>
             </div>
@@ -103,9 +128,8 @@
             <div class="row">
               <div class="col-md-9 form-group">
                 <label>Cliente</label>
-                <select class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                <select class="form-control" [(ngModel)]="ordenServicio.cliente.idCliente" name="idCliente" required>
+                  <option *ngFor="let c of clientes" [value]="c.idCliente">{{c.nombreCliente}}</option>
                 </select>
               </div>
               <div class="col-md-1 d-flex align-items-end">
@@ -116,19 +140,21 @@
             <div class="row">
               <div class="col-md-9 form-group">
                 <label>Técnico</label>
-                <select class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                <select class="form-control" [(ngModel)]="ordenServicio.tecnico.idTecnico" name="idTecnico" required>
+                  <option *ngFor="let t of tenicos" [value]="t.idTecnico">{{t.nombreCompleto}}</option>
                 </select>
               </div>
               <div class="col-md-3 d-flex align-items-end">
-                <button type="button" class="btn btn-danger btn-round" (click)="verDispobilidadTecnico(disponibilidad)"><i class="fa fa-eye"></i>Disponibilidad</button>
+                <button type="button" class="btn btn-danger btn-round"
+                  (click)="verDispobilidadTecnico(disponibilidad)"><i class="fa fa-eye"></i>Disponibilidad</button>
               </div>
             </div>
 
             <hr>
             <a class="btn btn-default" routerLink="/ordenes-servicio">Regresar a consultar ordenes</a>
-            <button class="btn btn-success">Guardar</button>
+            <button type="submit" [disabled]="!form.form.valid" class="btn btn-success">
+              Guardar
+            </button>
           </form>
         </div>
       </div>

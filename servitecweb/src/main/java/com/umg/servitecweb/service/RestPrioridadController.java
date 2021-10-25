@@ -43,7 +43,7 @@ public class RestPrioridadController {
 		return prioridades;
 	}
 
-	@GetMapping("/[id")
+	@GetMapping("/{id}")
 	public Prioridad obtener(@PathVariable Integer id) {
 
 		Prioridad p = repo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));

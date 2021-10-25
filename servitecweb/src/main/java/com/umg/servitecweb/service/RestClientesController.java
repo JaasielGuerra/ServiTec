@@ -56,7 +56,7 @@ public class RestClientesController {
 		Cliente clienteTest = clienteRepo.findByCodigoCliente(c.getCodigoCliente()).orElseGet(() -> null);
 
 		if (clienteTest != null) {
-			return new ResponseEntity(new Mensaje("El código ya existe."), HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity(new Mensaje("El código ya existe.", 1), HttpStatus.OK);
 		}
 
 		// obtener entidades relacionadas o en su caso lanzar un mensaje de que no
@@ -97,7 +97,7 @@ public class RestClientesController {
 				.orElseGet(() -> null);
 
 		if (clienteTest != null) {
-			return new ResponseEntity(new Mensaje("El código ya existe."), HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity(new Mensaje("El código ya existe.", 1), HttpStatus.OK);
 		}
 
 		// obtener entidades relacionadas o en su caso lanzar un mensaje de que no

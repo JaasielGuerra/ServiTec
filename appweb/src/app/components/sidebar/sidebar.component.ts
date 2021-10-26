@@ -10,19 +10,19 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'design_app', class: '' },
 
     // taller
-    { path: '/ordenes-servicio', title: 'Ordenes servicio',  icon:'emoticons_satisfied', class: '' },
-    { path: '/atender-ordenes', title: 'Atender ordenes',  icon:'emoticons_satisfied', class: '' },
-    { path: '/cobro-servicios', title: 'Cobro servicios',  icon:'emoticons_satisfied', class: '' },
-    { path: '/clientes', title: 'Clientes',  icon:'emoticons_satisfied', class: '' },
+    { path: '/ordenes-servicio', title: 'Ordenes servicio',  icon:'files_paper', class: '' },
+    { path: '/atender-ordenes', title: 'Atender ordenes',  icon:'ui-2_settings-90', class: '' },
+    { path: '/cobro-servicios', title: 'Cobro servicios',  icon:'business_money-coins', class: '' },
+    { path: '/clientes', title: 'Clientes',  icon:'users_circle-08', class: '' },
 
     //area tecnica
-    { path: '/servicios-tecnicos', title: 'Servicios tecnicos',  icon:'emoticons_satisfied', class: '' },
-    { path: '/personal-tecnico', title: 'Personal tecnico',  icon:'emoticons_satisfied', class: '' },
-    { path: '/inventario-repuestos', title: 'Inventario repuestos',  icon:'emoticons_satisfied', class: '' },
+    { path: '/servicios-tecnicos', title: 'Servicios tecnicos',  icon:'design_bullet-list-67', class: '' },
+    { path: '/personal-tecnico', title: 'Personal tecnico',  icon:'business_badge', class: '' },
+    { path: '/inventario-repuestos', title: 'Inventario repuestos',  icon:'files_box', class: '' },
 
     //administracion
-    { path: '/usuarios', title: 'Usuarios',  icon:'emoticons_satisfied', class: '' },
-    { path: '/reportes', title: 'Reportes',  icon:'emoticons_satisfied', class: '' }
+    { path: '/usuarios', title: 'Usuarios',  icon:'users_single-02', class: '' },
+    { path: '/reportes', title: 'Reportes',  icon:'business_chart-bar-32', class: '' }
 
 ];
 

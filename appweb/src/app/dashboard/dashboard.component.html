@@ -1,183 +1,135 @@
-<div class="panel-header panel-header-lg">
-    <canvas baseChart id="bigDashboardChart"
-                [datasets]="lineBigDashboardChartData"
-                [labels]="lineBigDashboardChartLabels"
-                 [colors]="lineBigDashboardChartColors"
-                [options]="lineBigDashboardChartOptions"
-                [chartType]="lineBigDashboardChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+<div class="panel-header panel-header-sm">
 </div>
 
 <div class="main-content">
   <div class="row">
-    <div class="col-lg-4">
-      <div class="card card-chart">
+    <div class="col-xl-3 col-lg-12 col-md-6">
+      <div class="card text-white bg-info">
         <div class="card-header">
-          <h5 class="card-category">Global Sales</h5>
-          <h4 class="card-title">Shipped Products</h4>
-          <div ngbDropdown>
-            <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" ngbDropdownToggle>
-              <i class="now-ui-icons loader_gear"></i>
-            </button>
-            <div ngbDropdownMenu class="dropdown-menu-right">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item text-danger" href="#">Remove Data</a>
-            </div>
-          </div>
+          <h4 class="card-title">Inventario de repuestos</h4>
         </div>
         <div class="card-body">
-          <div class="chart-area">
-            <canvas baseChart id="lineChartExample"
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [colors]="lineChartColors"
-                        [options]="lineChartOptions"
-                        [chartType]="lineChartType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Cantidad:</div>
+            <div class="col-md-6 font-italic text-danger">100</div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Costo:</div>
+            <div class="col-md-6 font-italic text-danger">Q100.0</div>
+          </div>
+
         </div>
         <div class="card-footer">
-          <div class="stats">
-            <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
-          </div>
+          <a href="#" class="btn btn-danger btn-sm">Ir a inventario</a>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-6">
-      <div class="card card-chart">
+    <div class="col-xl-3 col-lg-6 col-md-6">
+      <div class="card text-white bg-success">
         <div class="card-header">
-          <h5 class="card-category">2018 Sales</h5>
-          <h4 class="card-title">All products</h4>
-          <div ngbDropdown>
-            <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" ngbDropdownToggle>
-              <i class="now-ui-icons loader_gear"></i>
-            </button>
-            <div ngbDropdownMenu class="dropdown-menu-right">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item text-danger" href="#">Remove Data</a>
-            </div>
-          </div>
+          <h4 class="card-title">Ordenes reservadas</h4>
         </div>
         <div class="card-body">
-          <div class="chart-area">
-            <!-- <canvas id="lineChartExampleWithNumbersAndGrid"></canvas> -->
-            <canvas baseChart id="lineChartExampleWithNumbersAndGrid"
-                        [datasets]="lineChartWithNumbersAndGridData"
-                        [labels]="lineChartWithNumbersAndGridLabels"
-                        [colors]="lineChartWithNumbersAndGridColors"
-                        [options]="lineChartWithNumbersAndGridOptions"
-                        [chartType]="lineChartWithNumbersAndGridType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Cantidad:</div>
+            <div class="col-md-6 font-italic text-danger">100</div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Prioritarias:</div>
+            <div class="col-md-6 font-italic text-danger">100</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Fecha:</div>
+            <div class="col-md-6 font-italic">2021</div>
+          </div>
+
         </div>
         <div class="card-footer">
-          <div class="stats">
-            <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
-          </div>
+          <a href="#" class="btn btn-danger btn-sm">Ir a ordenes</a>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-6">
-      <div class="card card-chart">
+    <div class="col-xl-3 col-lg-6 col-md-6">
+      <div class="card text-white bg-warning">
         <div class="card-header">
-          <h5 class="card-category">Email Statistics</h5>
-          <h4 class="card-title">24 Hours Performance</h4>
+          <h4 class="card-title">Ordenes por entregar</h4>
         </div>
         <div class="card-body">
-          <div class="chart-area">
-            <canvas baseChart id="barChartSimpleGradientsNumbers"
-                        [datasets]="lineChartGradientsNumbersData"
-                        [labels]="lineChartGradientsNumbersLabels"
-                        [colors]="lineChartGradientsNumbersColors"
-                        [options]="lineChartGradientsNumbersOptions"
-                        [chartType]="lineChartGradientsNumbersType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Cantidad:</div>
+            <div class="col-md-6 font-italic text-success">100</div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Fecha:</div>
+            <div class="col-md-6 font-italic">2021</div>
+          </div>
+
         </div>
         <div class="card-footer">
-          <div class="stats">
-            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+          <a href="#" class="btn btn-danger btn-sm">Ir a cobros</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-12 col-md-6">
+      <div class="card text-white bg-secondary">
+        <div class="card-header">
+          <h4 class="card-title">Servicios cobrados</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Cantidad:</div>
+            <div class="col-md-6 font-italic text-success">100</div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Total:</div>
+            <div class="col-md-6 font-italic text-success">Q100.0</div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 font-weight-bold font-italic">Fecha:</div>
+            <div class="col-md-6 font-italic">2021</div>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-danger btn-sm">Ir a servicios cobrados</a>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="card  card-tasks">
+      <div class="card">
         <div class="card-header ">
-          <h5 class="card-category">Backend development</h5>
-          <h4 class="card-title">Tasks</h4>
+          <h5 class="card-category">Listado de personal técnico</h5>
+          <h4 class="card-title">Personal técnico</h4>
         </div>
         <div class="card-body ">
           <div class="table-full-width table-responsive">
             <table class="table">
-              <tbody>
+              <thead class="text-primary">
+                <th>Nombre completo</th>
+                <th>Estado</th>
+
+              </thead>
+              <tbody >
                 <tr>
+
+                  <td>Lorem ipsum dolor sit amet.</td>
                   <td>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" checked>
-                        <span class="form-check-sign"></span>
-                      </label>
-                    </div>
+                    <span class="badge badge-success">Activo</span>
+                    <span class="badge badge-danger">Inactivo</span>
                   </td>
-                  <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                      <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                      <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">
-                        <span class="form-check-sign"></span>
-                      </label>
-                    </div>
-                  </td>
-                  <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                      <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                      <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" checked>
-                        <span class="form-check-sign"></span>
-                      </label>
-                    </div>
-                  </td>
-                  <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                  </td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                      <i class="now-ui-icons ui-2_settings-90"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                      <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
-                  </td>
+
                 </tr>
               </tbody>
             </table>
@@ -185,109 +137,39 @@
         </div>
         <div class="card-footer ">
           <hr>
-          <div class="stats">
-            <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
-          </div>
+          <a href="#" class="btn btn-info btn-sm">Consultar personal</a>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-category">All Persons List</h5>
-          <h4 class="card-title"> Employees Stats</h4>
+          <h5 class="card-category">Listado de servicios ofrecidos</h5>
+          <h4 class="card-title">Servicios técnicos</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
-              <thead class=" text-primary">
-                <th>
-                  Name
-                </th>
-                <th>
-                  Country
-                </th>
-                <th>
-                  City
-                </th>
-                <th class="text-right">
-                  Salary
-                </th>
+              <thead class="text-primary">
+                <th>Descripción</th>
+
+                <th>Categoria</th>
+
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    Dakota Rice
-                  </td>
-                  <td>
-                    Niger
-                  </td>
-                  <td>
-                    Oud-Turnhout
-                  </td>
-                  <td class="text-right">
-                    $36,738
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Minerva Hooper
-                  </td>
-                  <td>
-                    Curaçao
-                  </td>
-                  <td>
-                    Sinaai-Waas
-                  </td>
-                  <td class="text-right">
-                    $23,789
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Sage Rodriguez
-                  </td>
-                  <td>
-                    Netherlands
-                  </td>
-                  <td>
-                    Baileux
-                  </td>
-                  <td class="text-right">
-                    $56,142
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Doris Greene
-                  </td>
-                  <td>
-                    Malawi
-                  </td>
-                  <td>
-                    Feldkirchen in Kärnten
-                  </td>
-                  <td class="text-right">
-                    $63,542
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    Mason Porter
-                  </td>
-                  <td>
-                    Chile
-                  </td>
-                  <td>
-                    Gloucester
-                  </td>
-                  <td class="text-right">
-                    $78,615
-                  </td>
+                  <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+
+                  <td>Lorem, ipsum.</td>
+
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <a href="#" class="btn btn-info btn-sm">Consultar servicios</a>
         </div>
       </div>
     </div>

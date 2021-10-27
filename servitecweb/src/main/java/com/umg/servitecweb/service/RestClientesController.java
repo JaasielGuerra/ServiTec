@@ -140,10 +140,15 @@ public class RestClientesController {
 		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
 	}
 
-	@GetMapping("/codigo/{codigo}")
-	private Cliente obtenerPorCodigo(@PathVariable String codigo) {
-		Cliente l = clienteRepo.findByCodigoCliente(codigo).orElseThrow(() -> new RecursoNoEncontradoException(codigo));
-		return l;
+	@GetMapping("/obtenerporcodigo/{codigo}")
+	private ResponseEntity<Cliente> obtenerPorCodigo(@PathVariable String codigo) {
+		Cliente cliente = clienteRepo.findByCodigoCliente(codigo).orElseGet(() -> null);
+
+		if (cliente == null) {
+			return new ResponseEntity(new Mensaje("El código es incorrecto, no se encontró ningún resultado.", 1),
+					HttpStatus.OK);
+		}
+		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 
 }

@@ -152,15 +152,6 @@ LOCK TABLES `servicio_aplicado` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `servicio_servicio_aplicados`
---
-
-LOCK TABLES `servicio_servicio_aplicados` WRITE;
-/*!40000 ALTER TABLE `servicio_servicio_aplicados` DISABLE KEYS */;
-/*!40000 ALTER TABLE `servicio_servicio_aplicados` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `tecnico`
 --
 
@@ -198,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-25 16:36:22
+-- Dump completed on 2021-10-26 23:46:06

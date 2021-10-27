@@ -10,6 +10,7 @@ import com.umg.servitecweb.model.Cliente;
 public interface IClienteRepo extends JpaRepository<Cliente, Long>{
 	public List<Cliente> findByEstado(Integer e);
 	public Optional<Cliente> findByCodigoCliente(String c);
+	public Integer countByCodigoCliente(String c);
 	public List<Cliente> findByEstadoAndNombreClienteContaining(Integer e, String search);
-	public Optional<Cliente> findByCodigoClienteAndIdClienteNot(String c, Long id);
+	public Integer countByCodigoClienteAndIdClienteNot(String c, Long id);
 }

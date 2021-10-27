@@ -2,9 +2,14 @@ package com.umg.servitecweb.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
+
+import javax.websocket.server.PathParam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +18,8 @@ import org.springframework.boot.json.JsonParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,6 +109,24 @@ public class RestOrdenesServicioController {
 		Orden o = ordenRepo.save(orden);
 		log.info("Nueva orden reservada");
 		return o;
+	}
+
+	@GetMapping("/cliente/{id}")
+	public List<Orden> consultarOrdenesCliente(@PathVariable Long id) {
+
+		Cliente c = clienteRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+
+		// finalizada, cobrada y entregada, reservada
+		Collection<EstadoOrden> e = estadoOrdenRepo.findByIdEstadoOrdenIn(Arrays.asList(4, 5, 1));
+
+		return ordenRepo.findByClienteAndEstadoOrdenIn(c, e);
+	}
+
+	@GetMapping("/{idOrden}")
+	public Orden infoOrdenServicio(@PathVariable Long idOrden) {
+
+		return ordenRepo.findById(idOrden).orElseThrow(() -> new RecursoNoEncontradoException(idOrden.toString()));
+
 	}
 
 	// compress the image bytes before storing it in the database

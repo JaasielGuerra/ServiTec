@@ -53,9 +53,9 @@ public class RestClientesController {
 	public ResponseEntity<Cliente> crear(@RequestBody Cliente c,
 			@RequestParam(value = "idusuario", required = true) Integer idUser) {
 
-		Cliente clienteTest = clienteRepo.findByCodigoCliente(c.getCodigoCliente()).orElseGet(() -> null);
+		Integer test = clienteRepo.countByCodigoCliente(c.getCodigoCliente());
 
-		if (clienteTest != null) {
+		if (test > 0) {
 			return new ResponseEntity(new Mensaje("El código ya existe.", 1), HttpStatus.OK);
 		}
 
@@ -90,45 +90,25 @@ public class RestClientesController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> actualizar(@RequestBody Cliente c,
-			@RequestParam(value = "idusuario", required = true) Integer idUser, @PathVariable Long id) {
+	public ResponseEntity<Cliente> actualizar(@RequestBody Cliente c, @PathVariable Long id) {
 
-		Cliente clienteTest = clienteRepo.findByCodigoClienteAndIdClienteNot(c.getCodigoCliente(), id)
-				.orElseGet(() -> null);
+		Cliente cliente = clienteRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
 
-		if (clienteTest != null) {
+		Integer test = clienteRepo.countByCodigoClienteAndIdClienteNot(c.getCodigoCliente(), id);
+		if (test > 0) {
 			return new ResponseEntity(new Mensaje("El código ya existe.", 1), HttpStatus.OK);
 		}
 
-		// obtener entidades relacionadas o en su caso lanzar un mensaje de que no
-		// existe el recruso
+		cliente.setCodigoCliente(c.getCodigoCliente());
+		cliente.setNombreCliente(c.getNombreCliente());
+		cliente.setTelefono(c.getTelefono());
+		cliente.setReferencia(c.getReferencia());
 
-		Cliente client = clienteRepo.findById(id).map(cliente -> {
-
-			cliente.setCodigoCliente(c.getCodigoCliente());
-			cliente.setNombreCliente(c.getNombreCliente());
-			cliente.setTelefono(c.getTelefono());
-			cliente.setReferencia(c.getReferencia());
-
-			return clienteRepo.save(cliente);
-
-		}).orElseGet(() -> { // sino existe el recurso a actualizar, entonces se crea uno
-
-			Usuario u = usuarioRepo.findById(idUser)
-					.orElseThrow(() -> new RecursoNoEncontradoException(idUser.toString()));
-
-			c.setIdCliente(null);
-			c.setUsuario(u);
-			c.setEstado(1);
-			c.setFechaCommit(Date.valueOf(LocalDate.now()));
-			c.setHoraCommit(Time.valueOf(LocalTime.now()));
-
-			return clienteRepo.save(c);
-		});
+		clienteRepo.save(cliente);
 
 		log.info("cliente actualizado con exito");
 
-		return new ResponseEntity<Cliente>(client, HttpStatus.OK);
+		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

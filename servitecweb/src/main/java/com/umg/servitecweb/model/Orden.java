@@ -15,7 +15,7 @@ public class Orden implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_orden")
-	private String idOrden;
+	private Long idOrden;
 
 	private int aplicable;
 
@@ -106,11 +106,11 @@ public class Orden implements Serializable {
 	public Orden() {
 	}
 
-	public String getIdOrden() {
+	public Long getIdOrden() {
 		return this.idOrden;
 	}
 
-	public void setIdOrden(String idOrden) {
+	public void setIdOrden(Long idOrden) {
 		this.idOrden = idOrden;
 	}
 

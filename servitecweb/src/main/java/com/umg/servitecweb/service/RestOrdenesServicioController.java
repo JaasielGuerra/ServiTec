@@ -4,23 +4,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import javax.websocket.server.PathParam;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParseException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.umg.servitecweb.exception.RecursoNoEncontradoException;
 import com.umg.servitecweb.model.Cliente;
 import com.umg.servitecweb.model.EstadoOrden;
-import com.umg.servitecweb.model.Mensaje;
 import com.umg.servitecweb.model.MotivoOrden;
 import com.umg.servitecweb.model.Orden;
 import com.umg.servitecweb.model.Prioridad;
@@ -46,7 +46,7 @@ import com.umg.servitecweb.repository.IPrioridadRepo;
 import com.umg.servitecweb.repository.ITecnicoRepo;
 import com.umg.servitecweb.repository.IUsuarioRepo;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RestController
 @RequestMapping("/ordenesservicio")
 public class RestOrdenesServicioController {
@@ -67,6 +67,24 @@ public class RestOrdenesServicioController {
 	private IClienteRepo clienteRepo;
 	@Autowired
 	private IEstadoOrdenRepo estadoOrdenRepo;
+
+	@GetMapping
+	public List<Orden> consultar(@RequestParam(value = "status", required = true) Integer status,
+			@RequestParam(value = "tecnico", required = false, defaultValue = "0") Integer tecnico,
+			@RequestParam(value = "prioridad", required = false, defaultValue = "0") Integer prioridad,
+			@RequestParam(value = "motivo", required = false, defaultValue = "0") Integer motivo,
+			@RequestParam(value = "cliente", required = false, defaultValue = "0") Long cliente,
+			@RequestParam(value = "fecha", required = false) @DateTimeFormat(iso = ISO.DATE) Date fecha) {
+
+		log.info("FECHA ----------- " + fecha);
+		EstadoOrden e = estadoOrdenRepo.findById(status).get();
+		Tecnico t = tecnicoRepo.findById(tecnico).orElseGet(() -> null);
+		Prioridad p = prioridadRepo.findById(prioridad).orElseGet(() -> null);
+		MotivoOrden m = motivoOrdenRepo.findById(motivo).orElseGet(() -> null);
+		Cliente c = clienteRepo.findById(cliente).orElseGet(() -> null);
+
+		return ordenRepo.readByFilters(t, p, m, c, fecha, e);
+	}
 
 	@PostMapping
 	public Orden generarOrden(@RequestParam("imageFile") MultipartFile file,
@@ -94,11 +112,7 @@ public class RestOrdenesServicioController {
 		Cliente cl = clienteRepo.findById(idCliente)
 				.orElseThrow(() -> new RecursoNoEncontradoException(idCliente.toString()));
 
-		log.info("Orden - " + orden);
-		log.info("Tamanio original de la imagen - " + file.getBytes().length);
-		log.info("Tamanio comprimido de la imagen - " + compressBytes(file.getBytes()));
-
-		orden.setImagenReferencia(compressBytes(file.getBytes()));
+		orden.setImagenReferencia(file.getBytes());
 		orden.setTecnico(tec);
 		orden.setPrioridad(prio);
 		orden.setEstadoOrden(est);
@@ -109,6 +123,53 @@ public class RestOrdenesServicioController {
 		Orden o = ordenRepo.save(orden);
 		log.info("Nueva orden reservada");
 		return o;
+	}
+
+	@PutMapping("/{id}")
+	public Orden actualizarOrden(@PathVariable Long id, @RequestParam("imageFile") MultipartFile file,
+			@RequestParam(value = "orden", required = false) String ord,
+			@RequestParam(value = "idtecnico", required = false) Integer idTecnico,
+			@RequestParam(value = "idprioridad", required = false) Integer idPrioridad,
+			@RequestParam(value = "idmotivo", required = false) Integer idMotivo,
+			@RequestParam(value = "idcliente", required = false) Long idCliente)
+			throws JsonMappingException, JsonProcessingException, JsonParseException, IOException {
+
+		Orden orden = new ObjectMapper().readValue(ord, Orden.class);
+
+		// obtener entidades relacionadas o en su caso lanzar un mensaje de que no //
+		// existe el recruso
+		Tecnico tec = tecnicoRepo.findById(idTecnico)
+				.orElseThrow(() -> new RecursoNoEncontradoException(idTecnico.toString()));
+		Prioridad prio = prioridadRepo.findById(idPrioridad)
+				.orElseThrow(() -> new RecursoNoEncontradoException(idPrioridad.toString()));
+		MotivoOrden mot = motivoOrdenRepo.findById(idMotivo)
+				.orElseThrow(() -> new RecursoNoEncontradoException(idMotivo.toString()));
+		Cliente cl = clienteRepo.findById(idCliente)
+				.orElseThrow(() -> new RecursoNoEncontradoException(idCliente.toString()));
+
+		orden.setIdOrden(id);
+		orden.setImagenReferencia(file.getBytes());
+		orden.setTecnico(tec);
+		orden.setPrioridad(prio);
+		orden.setMotivoOrden(mot);
+		orden.setCliente(cl);
+
+		Orden o = ordenRepo.save(orden);
+		log.info("Orden actualizada");
+		return o;
+	}
+
+	@DeleteMapping("/{id}")
+	public void eliminar(@PathVariable Long id) {
+
+		Orden orden = ordenRepo.findById(id).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+
+		EstadoOrden est = estadoOrdenRepo.findById(7).get(); // estado id 7 eliminada
+
+		orden.setEstadoOrden(est);
+
+		ordenRepo.save(orden);
+		log.info("Orden eliminada");
 	}
 
 	@GetMapping("/cliente/{id}")

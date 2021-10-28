@@ -1,6 +1,9 @@
 package com.umg.servitecweb;
 
 import java.util.List;
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +20,12 @@ public class ServitecwebApplication implements WebMvcConfigurer {
 	public static void main(String[] args) {
 		SpringApplication.run(ServitecwebApplication.class, args);
 	}
+	
+	 @PostConstruct
+	  public void init(){
+	    // Setting Spring Boot SetTimeZone
+	    TimeZone.setDefault(TimeZone.getTimeZone("UTC -6"));
+	  }
 
 	/**
 	 * Se registra el modulo Hibernate5 para JackSon a nivel de SpringBoot para que

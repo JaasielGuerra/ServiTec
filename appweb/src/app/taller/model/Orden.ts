@@ -10,6 +10,7 @@ export class Orden {
   fechaEntrega: string;
   descripcionOrden: string;
   descripcionRecibido: string;
+  imagenReferencia: any;
   diagnosticoTecnico: string;
   aplicable: number;
   descripcionExtra: string;

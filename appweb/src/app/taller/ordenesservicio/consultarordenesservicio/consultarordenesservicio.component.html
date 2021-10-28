@@ -1,12 +1,12 @@
 <div class="panel-header">
   <div class="header text-center">
-   <div class="row">
+    <div class="row">
       <div class="col-md-2">
-        <label class="text-info font-italic">10</label>
+        <label class="text-info font-italic">{{ordenes.length}}</label>
         <h6 class="text-white font-italic">Cantidad</h6>
       </div>
       <div class="col-md-2">
-        <label class="text-white font-italic">Fecha aqui</label>
+        <label class="text-white font-italic">{{fechaSel}}</label>
         <h6 class="text-white font-italic">Fecha</h6>
       </div>
       <div class="col-md-2">
@@ -18,57 +18,59 @@
 
 </div>
 <div class="main-content">
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Ordenes de servicio</h4>
+
         </div>
         <div class="card-body">
           <a class="btn btn-success" routerLink="/ordenes-servicio/crear">Nueva orden de servicio</a>
           <a class="btn btn-info" routerLink="/ordenes-servicio/catalogo-motivos">Catáloto de motivos</a>
 
-
-          <form>
-            <div class="row">
-              <div class="col-md-2">
-                <label>Tecnico</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Prioridad</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Motivo</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Cliente</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                  <label>Fecha</label>
-                  <input type="date" class="form-control form-control-sm">
-              </div>
-              <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
-              </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>Tecnico</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idTecnicoSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let t of tenicos" [value]="t.idTecnico">{{t.nombreCompleto}}</option>
+              </select>
             </div>
-          </form>
+            <div class="col-md-2">
+              <label>Prioridad</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idPriodidadSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let p of prioridaddes" [value]="p.idPrioridad">{{p.descripcion}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Motivo</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idMotivoSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let m of motivos" [value]="m.idMotivoOrden">{{m.descripcion}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Cliente</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idClienteSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let c of clientes" [value]="c.idCliente">{{c.nombreCliente}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Fecha ingreso</label>
+              <input type="date" class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="fechaSel">
+            </div>
+
+          </div>
 
           <div class="table-responsive">
             <table class="table">
               <thead class="text-primary">
                 <th>#</th>
+                <th>Foto</th>
                 <th>Fecha Ingreso</th>
                 <th>Entrega máxima</th>
                 <th>Descripcion</th>
@@ -78,19 +80,26 @@
                 <th>Cliente</th>
                 <th>Operaciones</th>
               </thead>
-              <tbody>
+              <tbody *ngFor="let o of ordenes">
                 <tr>
-                  <td>1</td>
-                  <td>demo</td>
-                  <td>asds</td>
-                  <td>asds</td>
-                  <td>asds</td>
-                  <td>asds</td>
-                  <td>asds</td>
-                  <td>asds</td>
+                  <td>{{o.idOrden}}</td>
                   <td>
-                    <a class="btn btn-warning btn-sm btn-round">Editar</a>
-                    <button type="button" class="btn btn-danger btn-sm btn-round">Eliminar</button>
+                    <img [src]="'data:image/jpg;base64,'+o.imagenReferencia" class="img-fluid img-thumbnail" alt="..." style="max-height: 75px;">
+                  </td>
+                  <td>{{o.fechaIngreso}}</td>
+                  <td>{{o.entregaMaxima}}</td>
+                  <td>{{o.descripcionOrden}}</td>
+                  <td>{{o.tecnico.nombreCompleto}}</td>
+                  <td>
+                    <span *ngIf="o.prioridad.idPrioridad === 1" class="badge badge-success">{{o.prioridad.descripcion}}</span>
+                    <span *ngIf="o.prioridad.idPrioridad === 2" class="badge badge-warning">{{o.prioridad.descripcion}}</span>
+                    <span *ngIf="o.prioridad.idPrioridad === 3" class="badge badge-danger">{{o.prioridad.descripcion}}</span>
+                  </td>
+                  <td>{{o.motivoOrden.descripcion}}</td>
+                  <td>{{o.cliente.nombreCliente}}</td>
+                  <td>
+                    <a class="btn btn-warning btn-sm btn-round" routerLink="/ordenes-servicio/editar/{{o.idOrden}}">Editar</a>
+                    <button type="button" class="btn btn-danger btn-sm btn-round" (click)="eliminar(o.idOrden)">Eliminar</button>
                   </td>
                 </tr>
               </tbody>

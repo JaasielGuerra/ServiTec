@@ -18,6 +18,7 @@
                 <label>Estante</label>
                 <select class="form-control form-control-sm" (change)="consultarInventario()"
                   [(ngModel)]="idEstanteSel">
+                  <option value="0">- Todos -</option>
                   <option *ngFor="let e of estantes" [value]="e.idEstante">{{e.descripcion}} {{e.numero}}</option>
                 </select>
               </div>
@@ -25,12 +26,14 @@
                 <label>Ubicacion</label>
                 <select class="form-control form-control-sm" (change)="consultarInventario()"
                   [(ngModel)]="idUbicacionSel">
+                  <option value="0">- Todos -</option>
                   <option *ngFor="let u of ubicaciones" [value]="u.idUbicacion">{{u.descripcion}}</option>
                 </select>
               </div>
               <div class="col-md-2">
                 <label>Caja</label>
                 <select class="form-control form-control-sm" (change)="consultarInventario()" [(ngModel)]="idCajaSel">
+                  <option value="0">- Todos -</option>
                   <option *ngFor="let c of cajas" [value]="c.idCaja">{{c.descripcion}} {{c.numero}}</option>
                 </select>
               </div>

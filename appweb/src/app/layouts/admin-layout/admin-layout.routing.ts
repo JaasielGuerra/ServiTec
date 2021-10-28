@@ -30,6 +30,7 @@ import { ConsultarservicioscobradosComponent } from "../../taller/cobroservicios
 import { CobrarservicioComponent } from "../../taller/cobroservicios/cobrarservicio/cobrarservicio.component";
 import { EditarrepuestoComponent } from "../../areatecnica/inventariorepuestos/editarrepuesto/editarrepuesto.component";
 import { EditarpersonalComponent } from "../../areatecnica/personaltecnico/editarpersonal/editarpersonal.component";
+import { EditarordenservicioComponent } from "../../taller/ordenesservicio/editarordenservicio/editarordenservicio.component";
 
 /**
  * Configuracion de rutas para navegacion de la aplicacion del menu principal
@@ -39,6 +40,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "ordenes-servicio", component: ConsultarordenesservicioComponent },
   { path: "ordenes-servicio/crear", component: CrearordenservicioComponent },
+  { path: "ordenes-servicio/editar/:id", component: EditarordenservicioComponent },
   {
     path: "ordenes-servicio/catalogo-motivos",
     component: CatalogomotivosComponent,

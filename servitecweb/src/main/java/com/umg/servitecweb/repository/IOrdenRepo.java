@@ -10,7 +10,7 @@ import com.umg.servitecweb.model.EstadoOrden;
 import com.umg.servitecweb.model.Orden;
 import com.umg.servitecweb.model.Tecnico;
 
-public interface IOrdenRepo extends JpaRepository<Orden, Long>{
+public interface IOrdenRepo extends JpaRepository<Orden, Long>, OrdenRepoCustom{
 	public Long countByTecnicoAndEstadoOrdenIn(Tecnico t, Collection<EstadoOrden> estados);
 	public List<Orden> findByClienteAndEstadoOrdenIn(Cliente c, Collection<EstadoOrden> estados);
 	public Orden findByIdOrdenAndCliente(Long id, Cliente c);

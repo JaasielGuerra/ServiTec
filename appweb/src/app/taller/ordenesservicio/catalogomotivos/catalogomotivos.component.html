@@ -11,17 +11,17 @@
     </div>
     <div class="modal-body">
 
-      <form novalidate #f="ngForm">
+      <form novalidate #f="ngForm" (ngSubmit)="guardar()">
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
               <label>Descripción</label>
-              <input type="text" class="form-control" placeholder="Requerido" required>
+              <input type="text" class="form-control" placeholder="Requerido" required [(ngModel)]="motivo.descripcion" name="descripcion">
             </div>
           </div>
         </div>
 
-        <button class="btn btn-primary" [disabled]="!f.form.valid" (click)="cerrar()">Guardar</button>
+        <button class="btn btn-primary" [disabled]="!f.form.valid">Guardar</button>
 
       </form>
     </div>
@@ -47,13 +47,14 @@
                 <th>Descripción</th>
                 <th>Operaciones</th>
               </thead>
-              <tbody >
+              <tbody *ngFor="let m of motivos">
                 <tr>
-                  <td>{{1}}</td>
-                  <td>{{''}}</td>
+                  <td>{{m.idMotivoOrden}}</td>
+                  <td>{{m.descripcion}}</td>
                   <td>
-                    <button type="button" class="btn btn-warning btn-sm btn-round" >Editar</button>
-                    <button type="button" class="btn btn-danger btn-sm btn-round">Eliminar</button>
+                    <button type="button" class="btn btn-warning btn-sm btn-round" (click)="editar(m, modalFormMotivo)">Editar</button>
+                    <button type="button" class="btn btn-danger btn-sm btn-round"
+                      (click)="eliminar(m.idMotivoOrden)">Eliminar</button>
                   </td>
                 </tr>
               </tbody>

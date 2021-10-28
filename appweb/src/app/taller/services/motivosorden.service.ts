@@ -17,4 +17,23 @@ export class MotivosordenService {
     };
     return this.http.get<MotivoOrden[]>(this.url, { params: p });
   }
+
+  crear(motivo: MotivoOrden) {
+    return this.http.post<MotivoOrden>(this.url, motivo);
+  }
+
+  actualizar(motivo: MotivoOrden) {
+    return this.http.put<MotivoOrden>(
+      this.url + `/${motivo.idMotivoOrden}`,
+      motivo
+    );
+  }
+
+  obtener(id: string) {
+    return this.http.get<MotivoOrden>(this.url + `/${id}`);
+  }
+
+  eliminar(id: string) {
+    return this.http.delete<MotivoOrden>(this.url + `/${id}`);
+  }
 }

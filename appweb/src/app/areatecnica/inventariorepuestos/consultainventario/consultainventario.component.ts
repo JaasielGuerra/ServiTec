@@ -95,9 +95,9 @@ export class ConsultainventarioComponent implements OnInit {
   }
 
   cargarFiltros() {
-    this.idEstanteSel = "1";
-    this.idUbicacionSel = "1";
-    this.idCajaSel = "1";
+    this.idEstanteSel = "0";
+    this.idUbicacionSel = "0";
+    this.idCajaSel = "0";
 
     this.estanteService.listar("1").subscribe(
       (data) => {

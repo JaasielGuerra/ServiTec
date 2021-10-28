@@ -21,6 +21,7 @@ import { PrioridadesService } from "./services/prioridades.service";
 import { ClientesService } from "./services/clientes.service";
 import { MotivosordenService } from "./services/motivosorden.service";
 import { ToastrModule } from "ngx-toastr";
+import { EditarordenservicioComponent } from './ordenesservicio/editarordenservicio/editarordenservicio.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ToastrModule } from "ngx-toastr";
     ConsultarordenescobrarComponent,
     ConsultarservicioscobradosComponent,
     CobrarservicioComponent,
+    EditarordenservicioComponent,
   ],
   imports: [
     CommonModule,

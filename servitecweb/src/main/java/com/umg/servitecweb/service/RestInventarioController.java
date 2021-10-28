@@ -284,17 +284,15 @@ public class RestInventarioController {
 
 	@GetMapping
 	public List<InventarioRepuesto> consultar(
-			@RequestParam(value = "estante", defaultValue = "1", required = false) Integer estante,
-			@RequestParam(value = "ubicacion", defaultValue = "1", required = false) Integer ubicacion,
-			@RequestParam(value = "caja", defaultValue = "1", required = false) Integer caja) {
+			@RequestParam(value = "estante", defaultValue = "0", required = false) Integer estante,
+			@RequestParam(value = "ubicacion", defaultValue = "0", required = false) Integer ubicacion,
+			@RequestParam(value = "caja", defaultValue = "0", required = false) Integer caja) {
 
-		Caja c = cajaRepo.findById(caja).orElseThrow(() -> new RecursoNoEncontradoException(caja.toString()));
-		Estante e = estanteRepo.findById(estante)
-				.orElseThrow(() -> new RecursoNoEncontradoException(estante.toString()));
-		Ubicacion u = ubicacionRepo.findById(ubicacion)
-				.orElseThrow(() -> new RecursoNoEncontradoException(ubicacion.toString()));
+		Caja c = cajaRepo.findById(caja).orElseGet(() -> null);
+		Estante e = estanteRepo.findById(estante).orElseGet(() -> null);
+		Ubicacion u = ubicacionRepo.findById(ubicacion).orElseGet(() -> null);
 
-		List<InventarioRepuesto> l = inventarioRepo.findByEstanteAndUbicacionAndCaja(e, u, c);
+		List<InventarioRepuesto> l = inventarioRepo.findByFilter(e, u, c);
 		return l;
 	}
 

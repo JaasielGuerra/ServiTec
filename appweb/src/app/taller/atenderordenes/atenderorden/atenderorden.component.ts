@@ -104,6 +104,7 @@ export class AtenderordenComponent implements OnInit {
           "Esta orden de servicio se finalizará como servicio no aplicado. ¿Continuar?"
         )
       ) {
+        this.ordenAtender.aplicable = this.servicioNoAplicable ? 0 : 1;
         this.service.finalizarOrden(this.ordenAtender).subscribe(
           (d) => {
             this.msjSuccess();
@@ -115,6 +116,7 @@ export class AtenderordenComponent implements OnInit {
         );
       }
     } else if (confirm("La orden va a pasar al área de cobro. ¿Continuar?")) {
+      this.ordenAtender.aplicable = this.servicioNoAplicable ? 0 : 1;
       this.service.finalizarOrden(this.ordenAtender).subscribe(
         (d) => {
           this.msjSuccess();

@@ -5,13 +5,13 @@
         <h6 class="text-info font-italic">Cantidad:</h6>
       </div>
       <div class="col-md-1 col-lg-1">
-        <label class="text-white font-italic">10</label>
+        <label class="text-white font-italic">{{cantidadOrdenes}}</label>
       </div>
       <div class="col-md-2 col-lg-1">
         <h6 class="text-danger font-italic">Total:</h6>
       </div>
       <div class="col-md-3 col-lg-3">
-        <label class="text-white font-italic">Q1500.0</label>
+        <label class="text-white font-italic">Q{{totalCobros}}</label>
       </div>
     </div>
   </div>
@@ -28,27 +28,27 @@
 
           <a class="btn btn-default" routerLink="/cobro-servicios">Regresar a cobro de servicios</a>
 
-          <form>
-            <div class="row">
-              <div class="col-md-2">
-                <label>Numero orden</label>
-                <input type="number" class="form-control form-control-sm" placeholder="#">
-              </div>
-              <div class="col-md-2">
-                <label>Cliente</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Fecha entrega</label>
-                <input type="date" class="form-control form-control-sm">
-              </div>
-              <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
-              </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label>Numero orden</label>
+              <input type="number" class="form-control form-control-sm" placeholder="#" [(ngModel)]="idOrdenBuscar"
+                (keyup)="consultar()">
             </div>
-          </form>
+            <div class="col-md-2">
+              <label>Cliente</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idClienteSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let c of clientes" [value]="c.idCliente">{{c.nombreCliente}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Fecha entrega</label>
+              <input type="date" class="form-control form-control-sm" [(ngModel)]="fechaSel" (change)="consultar()">
+            </div>
+
+          </div>
+
 
           <div class="table-responsive">
             <table class="table">
@@ -57,21 +57,28 @@
                 <th>Fecha ingreso</th>
                 <th>Fecha entrega</th>
                 <th>Descripcion orden</th>
+                <th>Servicio aplicado</th>
                 <th class="text-right">Costo total</th>
                 <th>Cliente</th>
-                <th>Operaciones</th>
+                <th *ngIf="false">Operaciones</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>fecha</td>
-                  <td>fecha</td>
+                <tr *ngFor="let o of ordenesCobradas">
+                  <td>{{o.idOrden}}</td>
+                  <td>{{o.fechaIngreso}}</td>
+                  <td>{{o.fechaEntrega}}</td>
                   <td>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
+                    {{o.descripcionOrden}}
                   </td>
-                  <td class="text-right">Q1500</td>
-                  <td>Cliente</td>
                   <td>
+                    <span *ngIf="o.aplicable === 1" class="badge badge-success">SI</span>
+                    <span *ngIf="o.aplicable === 0" class="badge badge-danger">NO</span>
+                  </td>
+                  <td class="text-right">Q{{o.totalCostoServicio}}</td>
+                  <td>
+                    {{o.cliente.nombreCliente}}
+                  </td>
+                  <td *ngIf="false">
                     <button type="button" class="btn btn-info btn-sm btn-round">Imprimir comprobante</button>
                   </td>
                 </tr>

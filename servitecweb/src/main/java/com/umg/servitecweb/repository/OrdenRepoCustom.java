@@ -19,4 +19,6 @@ public interface OrdenRepoCustom {
 			Collection<EstadoOrden> e);
 	
 	public List<Orden> readByIdOrdenAndClienteAndEstado(Long id, Cliente c, EstadoOrden e);
+	
+	public List<Orden> readByIdOrdenAndClienteAndEstadoAndFecha(Long id, Cliente c, Collection<EstadoOrden> e, Date fechaEntrega);
 }

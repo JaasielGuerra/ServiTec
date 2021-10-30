@@ -104,6 +104,16 @@ export class OrdenesService {
     return this.http.get<Orden[]>(this.url + `/cobrar`, { params: p });
   }
 
+  consultarCobradas(idorden: string, client: string, fecha: string) {
+    let p = {
+      orden: idorden,
+      cliente: client,
+      fecha: fecha,
+    };
+
+    return this.http.get<Orden[]>(this.url + `/cobradas`, { params: p });
+  }
+
   obtener(id: string) {
     return this.http.get<Orden>(this.url + `/${id}`);
   }
@@ -124,5 +134,13 @@ export class OrdenesService {
       this.url + `/finalizar/${orden.idOrden}`,
       orden
     );
+  }
+
+  cobrarOrden(orden: Orden) {
+    return this.http.put<Orden>(this.url + `/cobrar/${orden.idOrden}`, orden);
+  }
+
+  entregarOrden(orden: Orden) {
+    return this.http.put<Orden>(this.url + `/entregar/${orden.idOrden}`, orden);
   }
 }

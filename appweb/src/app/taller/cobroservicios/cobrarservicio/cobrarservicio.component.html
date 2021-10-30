@@ -11,45 +11,12 @@
       </button>
     </div>
     <div class="modal-body">
-
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngFor="let f of fotosDiagnostico">
           <div class="card">
-            <img src="../../../../assets/img/angular2-logo-white.png" class="card-img-top" alt="foto">
+            <img [src]="'data:image/jpg;base64,'+f.imagen" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="../../../../assets/img/angular2-logo-white.png" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="../../../../assets/img/angular2-logo-white.png" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="../../../../assets/img/angular2-logo-white.png" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img src="../../../../assets/img/angular2-logo-white.png" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="card-text">{{f.descripcion}}</p>
             </div>
           </div>
         </div>
@@ -81,11 +48,11 @@
               <th class="text-right">Subtotal</th>
             </thead>
             <tbody>
-              <tr>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td class="text-right">Q100.0</td>
-                <td class="text-center">2</td>
-                <td class="text-right">Q200.0</td>
+              <tr *ngFor="let r of repuestosEmpleados">
+                <td>{{r.inventarioRepuesto.descripcion}}</td>
+                <td class="text-right">Q{{r.precio}}</td>
+                <td class="text-center">{{r.cantidad}}</td>
+                <td class="text-right">Q{{r.cantidad * r.precio}}</td>
               </tr>
             </tbody>
           </table>
@@ -94,7 +61,7 @@
 
       <div class="d-flex justify-content-end">
         <h5 class="font-weight-bold font-italic mr-5"><ins>Total:</ins></h5>
-        <h5 class="font-weight-bold font-italic text-danger"><ins>Q200.0</ins></h5>
+        <h5 class="font-weight-bold font-italic text-danger"><ins>Q{{ordenCobrar.costoRepuestos}}</ins></h5>
       </div>
 
     </div>
@@ -124,11 +91,11 @@
               <th class="text-right">Subtotal</th>
             </thead>
             <tbody>
-              <tr>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td class="text-right">Q100.0</td>
-                <td class="text-center">2</td>
-                <td class="text-right">Q200.0</td>
+              <tr *ngFor="let s of serviciosAplicados">
+                <td>{{s.servicio.descripcion}}</td>
+                <td class="text-right">Q{{s.precio}}</td>
+                <td class="text-center">{{s.cantidad}}</td>
+                <td class="text-right">Q{{s.precio * s.cantidad}}</td>
               </tr>
             </tbody>
           </table>
@@ -137,7 +104,7 @@
 
       <div class="d-flex justify-content-end">
         <h5 class="font-weight-bold font-italic mr-5"><ins>Total:</ins></h5>
-        <h5 class="font-weight-bold font-italic text-danger"><ins>Q200.0</ins></h5>
+        <h5 class="font-weight-bold font-italic text-danger"><ins>Q{{ordenCobrar.costoServicios}}</ins></h5>
       </div>
 
     </div>
@@ -149,102 +116,116 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <form action="#">
-          <div class="card-header">
-            <h5 class="title">Entregar/Cobrar servicio</h5>
+      <div class="card" *ngIf="ordenCobrar">
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card text-white bg-secondary">
-                  <div class="card-header text-center">
-                    <h6 class="font-italic font-weight-bold"><ins>Servicio técnico</ins></h6>
+        <div class="card-header">
+          <h5 class="title" *ngIf="ordenCobrar.aplicable == 1">Cobrar servicio</h5>
+          <h5 class="title" *ngIf="ordenCobrar.aplicable == 0">Entregar servicio</h5>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card text-white bg-secondary">
+                <div class="card-header text-center">
+                  <h6 class="font-italic font-weight-bold"><ins>Servicio técnico</ins></h6>
+                </div>
+                <div class="card-body">
+
+
+                  <div class="row">
+                    <div class="col-md-3 font-weight-bold font-italic">Aplicable:</div>
+                    <div class="col-md-8 font-italic" *ngIf="ordenCobrar.aplicable === 0">
+                      <span class="badge badge-danger">No se pudo realizar el servicio</span>
+                    </div>
+                    <div class="col-md-8 font-italic" *ngIf="ordenCobrar.aplicable === 1">
+                      <span class="badge badge-success">Servicio aplicado con éxito</span>
+                    </div>
                   </div>
-                  <div class="card-body">
-
-
-                    <div class="row">
-                      <div class="col-md-3 font-weight-bold font-italic">Aplicable:</div>
-                      <div class="col-md-8 font-italic">No se pudo realizar el servicio / Servicio aplicado con éxito
-                      </div>
+                  <div class="row">
+                    <div class="col-md-3 font-weight-bold font-italic">Diagnóstico técnico:</div>
+                    <div class="col-md-8 font-italic">
+                      {{ordenCobrar.diagnosticoTecnico}}
                     </div>
-                    <div class="row">
-                      <div class="col-md-3 font-weight-bold font-italic">Diagnóstico técnico:</div>
-                      <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Obcaecati, provident.</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3 font-weight-bold font-italic">Costo repuestos:</div>
-                      <div class="col-md-6 font-italic">Q100.0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3 font-weight-bold font-italic">Costo servicios:</div>
-                      <div class="col-md-6 font-italic">Q100.0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3 font-weight-bold font-italic">Descripción extras:</div>
-                      <div class="col-md-8 font-italic">No hay extras / Descripcion extras</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3 font-weight-bold font-italic">Costo extras:</div>
-                      <div class="col-md-8 font-italic">Q100.0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <hr>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <h5 class="font-weight-bold font-italic"><ins>Costo total servicio:</ins></h5>
-                      </div>
-                      <div class="col-md-2">
-                        <h5 class="font-weight-bold font-italic text-success"><ins>Q100.0</ins></h5>
-                      </div>
-                    </div>
-
-
-                    <button type="button" class="btn btn-info" (click)="verFotosDiagnostico(modalFotos)">Fotos
-                      diagnóstico</button>
-                    <button type="button" class="btn btn-warning"
-                      (click)="verRepuestosEmpleados(modalRepuestos)">Repuestos empleados</button>
-                    <button type="button" class="btn btn-primary" (click)="verServiciosAplicados(modalServicios)">Servicios aplicados</button>
-                    <button type="button" class="btn btn-success">Cobrar</button>
-                    <button type="button" class="btn btn-danger">Entregar</button>
-                    <a routerLink="/cobro-servicios" class="btn btn-default">Volver a cobros de servicios</a>
-                    <div class="form-check">
-                      <label class="form-check-label text-white">
-                        <input class="form-check-input" type="checkbox" value="">
-                        Imprimir comprobante
-                        <span class="form-check-sign"></span>
-                      </label>
-                    </div>
-
                   </div>
+                  <div class="row">
+                    <div class="col-md-3 font-weight-bold font-italic">Costo repuestos:</div>
+                    <div class="col-md-6 font-italic">Q{{ordenCobrar.costoRepuestos}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 font-weight-bold font-italic">Costo servicios:</div>
+                    <div class="col-md-6 font-italic">Q{{ordenCobrar.costoServicios}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 font-weight-bold font-italic">Descripción extras:</div>
+                    <div class="col-md-8 font-italic" *ngIf="!ordenCobrar.descripcionExtra">No hay extras</div>
+                    <div class="col-md-8 font-italic" *ngIf="ordenCobrar.descripcionExtra">
+                      {{ordenCobrar.descripcionExtra}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 font-weight-bold font-italic">Costo extras:</div>
+                    <div class="col-md-8 font-italic">Q{{ordenCobrar.costoExtra}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <hr>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h5 class="font-weight-bold font-italic"><ins>Costo total:</ins></h5>
+                    </div>
+                    <div class="col-md-2">
+                      <h5 class="font-weight-bold font-italic text-success">
+                        <ins>Q{{ordenCobrar.totalCostoServicio}}</ins></h5>
+                    </div>
+                  </div>
+
+
+                  <button type="button" class="btn btn-info" (click)="verFotosDiagnostico(modalFotos)"
+                    *ngIf="ordenCobrar.aplicable == 1">Fotos
+                    diagnóstico</button>
+                  <button type="button" class="btn btn-warning" *ngIf="ordenCobrar.aplicable == 1"
+                    (click)="verRepuestosEmpleados(modalRepuestos)">Repuestos empleados</button>
+                  <button type="button" class="btn btn-primary" *ngIf="ordenCobrar.aplicable == 1"
+                    (click)="verServiciosAplicados(modalServicios)">Servicios aplicados</button>
+                  <button type="button" class="btn btn-success" *ngIf="ordenCobrar.aplicable == 1"
+                    [disabled]="cambio < 0 || !cambio" (click)="cobrar()">Cobrar</button>
+                  <button type="button" class="btn btn-danger" *ngIf="ordenCobrar.aplicable == 0"
+                    (click)="entregar()">Entregar</button>
+                  <a routerLink="/cobro-servicios" class="btn btn-default">Volver a cobros de servicios</a>
+                  <div class="form-check" *ngIf="false">
+                    <label class="form-check-label text-white">
+                      <input class="form-check-input" type="checkbox" value="">
+                      Imprimir comprobante
+                      <span class="form-check-sign"></span>
+                    </label>
+                  </div>
+
                 </div>
               </div>
             </div>
-
           </div>
-          <div class="card-body">
 
-            <div class="row">
-              <div class="col-md-2 form-group">
-                <label>Fecha entrega</label>
-                <input type="date" class="form-control" required>
-              </div>
-              <div class="col-md-2 form-group">
-                <label>Efectivo</label>
-                <input type="number" class="form-control text-success" placeholder="Q">
-              </div>
-              <div class="col-md-2 form-group">
-                <label>Cambio</label>
-                <input type="number" class="form-control text-info" value="100" readonly>
-              </div>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-2 form-group">
+              <label>Fecha entrega</label>
+              <input type="date" class="form-control" required [(ngModel)]="ordenCobrar.fechaEntrega">
             </div>
-
+            <div class="col-md-2 form-group" *ngIf="ordenCobrar.aplicable == 1">
+              <label>Efectivo</label>
+              <input type="number" class="form-control text-success" placeholder="Q" [(ngModel)]="efectivo"
+                (keyup)="calcularCambio()">
+            </div>
+            <div class="col-md-2 form-group" *ngIf="ordenCobrar.aplicable == 1">
+              <label>Cambio</label>
+              <input type="number" class="form-control text-info" value="100" readonly [(ngModel)]="cambio">
+            </div>
           </div>
-        </form>
+
+        </div>
+
       </div>
     </div>
 

@@ -140,6 +140,18 @@ public class RestOrdenesServicioController {
 		return ordenRepo.readByIdOrdenAndClienteAndEstado(orden, c, e);
 	}
 
+	@GetMapping("/cobradas")
+	public List<Orden> consultarOrdenesCobradas(
+			@RequestParam(value = "orden", required = false, defaultValue = "0") Long orden,
+			@RequestParam(value = "cliente", required = false, defaultValue = "0") Long cliente,
+			@RequestParam(value = "fecha", required = false) @DateTimeFormat(iso = ISO.DATE) Date fecha) {
+
+		Collection<EstadoOrden> e = estadoOrdenRepo.findByIdEstadoOrdenIn(Arrays.asList(5, 6));// cobradas y entregadas,
+																								// solo entregadas
+		Cliente c = clienteRepo.findById(cliente).orElseGet(() -> null);
+		return ordenRepo.readByIdOrdenAndClienteAndEstadoAndFecha(orden, c, e, fecha);
+	}
+
 	@PostMapping
 	public Orden generarOrden(@RequestParam("imageFile") MultipartFile file,
 			@RequestParam(value = "orden", required = true) String ord,
@@ -263,6 +275,38 @@ public class RestOrdenesServicioController {
 
 		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
 		log.info("Orden puesta en pendiente");
+		return o;
+	}
+
+	@PutMapping("/cobrar/{id}")
+	public Orden cobrarOrden(@PathVariable Long id, @RequestBody Orden ordenActualizar) {
+
+		Orden o = ordenRepo.findById(id).map(orden -> {
+
+			EstadoOrden est = estadoOrdenRepo.findById(5).get(); // estado id 5 cobrada y entregada
+			orden.setEstadoOrden(est);
+			orden.setFechaEntrega(ordenActualizar.getFechaEntrega());
+
+			return ordenRepo.save(orden);
+
+		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+		log.info("Orden cobrada	");
+		return o;
+	}
+
+	@PutMapping("/entregar/{id}")
+	public Orden entregarOrden(@PathVariable Long id, @RequestBody Orden ordenActualizar) {
+
+		Orden o = ordenRepo.findById(id).map(orden -> {
+
+			EstadoOrden est = estadoOrdenRepo.findById(6).get(); // estado id 6 solo entregada
+			orden.setEstadoOrden(est);
+			orden.setFechaEntrega(ordenActualizar.getFechaEntrega());
+
+			return ordenRepo.save(orden);
+
+		}).orElseThrow(() -> new RecursoNoEncontradoException(id.toString()));
+		log.info("Orden cobrada	");
 		return o;
 	}
 

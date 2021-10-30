@@ -1,6 +1,8 @@
 package com.umg.servitecweb.repository;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -54,6 +56,76 @@ public class OrdenRepoCustomImpl implements OrdenRepoCustom {
 			q.setParameter("c", c);
 		if (fechaIngreso != null)
 			q.setParameter("fecha", fechaIngreso);
+
+		return q.getResultList();
+	}
+
+	@Override
+	public List<Orden> readByFiltersAndEstados(Tecnico t, Prioridad p, MotivoOrden m, Cliente c, Date fechaIngreso,
+			Collection<EstadoOrden> e) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("SELECT o FROM Orden o WHERE o.estadoOrden IN( ");
+
+		for (Iterator<EstadoOrden> i = e.iterator(); i.hasNext();) {
+			EstadoOrden estadoOrden = (EstadoOrden) i.next();
+			query.append(":e" + estadoOrden.getIdEstadoOrden());
+
+			if (i.hasNext()) {
+				query.append(" , ");
+			}
+		}
+
+		query.append(") ");
+
+		if (t != null)
+			query.append(" AND o.tecnico = :t ");
+		if (p != null)
+			query.append(" AND o.prioridad = :p ");
+		if (m != null)
+			query.append(" AND o.motivoOrden = :m ");
+		if (c != null)
+			query.append(" AND o.cliente = :c ");
+		if (fechaIngreso != null)
+			query.append(" AND o.fechaIngreso = :fecha ");
+
+		TypedQuery<Orden> q = em.createQuery(query.toString(), Orden.class);
+
+		e.forEach(s -> {
+			q.setParameter("e" + s.getIdEstadoOrden(), s);
+		});
+
+		if (t != null)
+			q.setParameter("t", t);
+		if (p != null)
+			q.setParameter("p", p);
+		if (m != null)
+			q.setParameter("m", m);
+		if (c != null)
+			q.setParameter("c", c);
+		if (fechaIngreso != null)
+			q.setParameter("fecha", fechaIngreso);
+
+		return q.getResultList();
+	}
+
+	@Override
+	public List<Orden> readByIdOrdenAndClienteAndEstado(Long id, Cliente c, EstadoOrden e) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("SELECT o FROM Orden o WHERE o.estadoOrden = :e ");
+
+		if (c != null)
+			query.append(" AND o.cliente = :c ");
+		if (id > 0)
+			query.append(" AND o.idOrden = :id ");
+
+		TypedQuery<Orden> q = em.createQuery(query.toString(), Orden.class);
+
+		if (c != null)
+			q.setParameter("c", c);
+		if (id > 0)
+			q.setParameter("id", id);
 
 		return q.getResultList();
 	}

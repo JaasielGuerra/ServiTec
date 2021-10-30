@@ -23,7 +23,9 @@ public class FotosDiagnostico implements Serializable {
 
 	private int estado;
 
-	private String imagen;
+	@Lob
+	@Column(name="imagen", length = 65535)
+	private byte[] imagen;
 
 	//bi-directional many-to-one association to Orden
 	@ManyToOne
@@ -57,11 +59,11 @@ public class FotosDiagnostico implements Serializable {
 		this.estado = estado;
 	}
 
-	public String getImagen() {
+	public byte[] getImagen() {
 		return this.imagen;
 	}
 
-	public void setImagen(String imagen) {
+	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
 

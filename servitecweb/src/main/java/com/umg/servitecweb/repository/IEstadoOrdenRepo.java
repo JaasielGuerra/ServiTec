@@ -9,4 +9,5 @@ import com.umg.servitecweb.model.EstadoOrden;
 
 public interface IEstadoOrdenRepo extends JpaRepository<EstadoOrden, Integer>, OrdenRepoCustom{
 	public List<EstadoOrden> findByIdEstadoOrdenIn(Collection<Integer> ids);
+	public List<EstadoOrden> findByEstado(Integer e);
 }

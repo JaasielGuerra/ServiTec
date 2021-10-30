@@ -21,7 +21,13 @@ import { PrioridadesService } from "./services/prioridades.service";
 import { ClientesService } from "./services/clientes.service";
 import { MotivosordenService } from "./services/motivosorden.service";
 import { ToastrModule } from "ngx-toastr";
-import { EditarordenservicioComponent } from './ordenesservicio/editarordenservicio/editarordenservicio.component';
+import { EditarordenservicioComponent } from "./ordenesservicio/editarordenservicio/editarordenservicio.component";
+import { EstadoordenService } from "./services/estadoorden.service";
+import { InventarioService } from "../areatecnica/service/inventario.service";
+import { ServiciostecnicosService } from "../areatecnica/service/serviciostecnicos.service";
+import { RepuestosService } from "./services/repuestos.service";
+import { ServiciosService } from "./services/servicios.service";
+import { FotosService } from "./services/fotos.service";
 
 @NgModule({
   declarations: [
@@ -43,14 +49,20 @@ import { EditarordenservicioComponent } from './ordenesservicio/editarordenservi
     NgbModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule
+    ToastrModule,
   ],
   providers: [
     OrdenesService,
     TecnicosService,
     PrioridadesService,
     ClientesService,
-    MotivosordenService
+    MotivosordenService,
+    EstadoordenService,
+    InventarioService,
+    ServiciostecnicosService,
+    RepuestosService,
+    ServiciosService,
+    FotosService
   ],
 })
 export class TallerModule {}

@@ -1,7 +1,10 @@
 import { Tecnico } from "../../areatecnica/model/Tecnico";
 import { Cliente } from "./Cliente";
+import { EstadoOrden } from "./EstadoOrden";
 import { MotivoOrden } from "./MotivoOrden";
 import { Prioridad } from "./Prioridad";
+import { RepuestoEmpleado } from "./RepuestoEmpleado";
+import { ServicioAplicado } from "./ServicioAplicado";
 
 export class Orden {
   idOrden: number;
@@ -18,7 +21,12 @@ export class Orden {
   totalCostoServicio: number;
   tecnico: Tecnico;
   prioridad: Prioridad;
-  estadoOrden: Orden;
+  estadoOrden: EstadoOrden;
   motivoOrden: MotivoOrden;
   cliente: Cliente;
+  costoRepuestos: number;
+  costoServicios: number;
+
+  repuestoEmpleados: RepuestoEmpleado[];
+  servicioAplicados: ServicioAplicado[];
 }

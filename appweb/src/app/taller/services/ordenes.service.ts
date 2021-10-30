@@ -75,7 +75,54 @@ export class OrdenesService {
     return this.http.get<Orden[]>(this.url, { params: p });
   }
 
+  consultarAtender(
+    status: string,
+    tec: string,
+    prio: string,
+    mot: string,
+    client: string,
+    fechaIngreso: string
+  ) {
+    let p = {
+      status: status,
+      tecnico: tec,
+      prioridad: prio,
+      motivo: mot,
+      cliente: client,
+      fecha: fechaIngreso,
+    };
+
+    return this.http.get<Orden[]>(this.url + `/atender`, { params: p });
+  }
+
+  consultarCobrar(idorden: string, client: string) {
+    let p = {
+      orden: idorden,
+      cliente: client,
+    };
+
+    return this.http.get<Orden[]>(this.url + `/cobrar`, { params: p });
+  }
+
   obtener(id: string) {
     return this.http.get<Orden>(this.url + `/${id}`);
+  }
+
+  atender(id: string) {
+    return this.http.put<Orden>(this.url + `/atender/${id}`, undefined);
+  }
+
+  ponerPendiente(orden: Orden) {
+    return this.http.put<Orden>(
+      this.url + `/ponerpendiente/${orden.idOrden}`,
+      orden
+    );
+  }
+
+  finalizarOrden(orden: Orden) {
+    return this.http.put<Orden>(
+      this.url + `/finalizar/${orden.idOrden}`,
+      orden
+    );
   }
 }

@@ -5,102 +5,107 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
-@Table(name="orden")
-@NamedQuery(name="Orden.findAll", query="SELECT o FROM Orden o")
+@Table(name = "orden")
+@NamedQuery(name = "Orden.findAll", query = "SELECT o FROM Orden o")
 public class Orden implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_orden")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_orden")
 	private Long idOrden;
 
 	private int aplicable;
 
-	@Column(name="costo_extra")
+	@Column(name = "costo_extra")
 	private double costoExtra;
 
-	@Column(name="descripcion_extra")
+	@Column(name = "descripcion_extra")
 	private String descripcionExtra;
 
-	@Column(name="descripcion_orden")
+	@Column(name = "descripcion_orden")
 	private String descripcionOrden;
 
-	@Column(name="descripcion_recibido")
+	@Column(name = "descripcion_recibido")
 	private String descripcionRecibido;
 
-	@Column(name="diagnostico_tecnico")
+	@Column(name = "diagnostico_tecnico")
 	private String diagnosticoTecnico;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_commit")
+	@Column(name = "fecha_commit")
 	private Date fechaCommit;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_entrega")
+	@Column(name = "fecha_entrega")
 	private Date fechaEntrega;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_ingreso")
+	@Column(name = "fecha_ingreso")
 	private Date fechaIngreso;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_maxima_entrega")
+	@Column(name = "fecha_maxima_entrega")
 	private Date fechaMaximaEntrega;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="hora_commit")
+	@Column(name = "hora_commit")
 	private Date horaCommit;
 
 	@Lob
-	@Column(name="imagen_referencia", length = 65535)
+	@Column(name = "imagen_referencia", length = 65535)
 	private byte[] imagenReferencia;
 
-	@Column(name="total_costo_servicio")
+	@Column(name = "total_costo_servicio")
 	private double totalCostoServicio;
 
-	//bi-directional many-to-one association to FotosDiagnostico
-	@OneToMany(mappedBy="orden")
+	@Column(name = "costo_repuestos")
+	private double costoRepuestos;
+
+	@Column(name = "costo_servicios")
+	private double costoServicios;
+
+	// bi-directional many-to-one association to FotosDiagnostico
+	@OneToMany(mappedBy = "orden")
 	private List<FotosDiagnostico> fotosDiagnosticos;
 
-	//bi-directional many-to-one association to Cliente
+	// bi-directional many-to-one association to Cliente
 	@ManyToOne
-	@JoinColumn(name="id_cliente")
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
-	//bi-directional many-to-one association to EstadoOrden
+	// bi-directional many-to-one association to EstadoOrden
 	@ManyToOne
-	@JoinColumn(name="id_estado_orden")
+	@JoinColumn(name = "id_estado_orden")
 	private EstadoOrden estadoOrden;
 
-	//bi-directional many-to-one association to MotivoOrden
+	// bi-directional many-to-one association to MotivoOrden
 	@ManyToOne
-	@JoinColumn(name="id_motivo_orden")
+	@JoinColumn(name = "id_motivo_orden")
 	private MotivoOrden motivoOrden;
 
-	//bi-directional many-to-one association to Prioridad
+	// bi-directional many-to-one association to Prioridad
 	@ManyToOne
-	@JoinColumn(name="id_prioridad")
+	@JoinColumn(name = "id_prioridad")
 	private Prioridad prioridad;
 
-	//bi-directional many-to-one association to Tecnico
+	// bi-directional many-to-one association to Tecnico
 	@ManyToOne
-	@JoinColumn(name="id_tecnico")
+	@JoinColumn(name = "id_tecnico")
 	private Tecnico tecnico;
 
-	//bi-directional many-to-one association to Usuario
+	// bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	//bi-directional many-to-one association to RepuestoEmpleado
-	@OneToMany(mappedBy="orden")
+	// bi-directional many-to-one association to RepuestoEmpleado
+	@OneToMany(mappedBy = "orden")
 	private List<RepuestoEmpleado> repuestoEmpleados;
 
-	//bi-directional many-to-one association to ServicioAplicado
-	@OneToMany(mappedBy="orden")
+	// bi-directional many-to-one association to ServicioAplicado
+	@OneToMany(mappedBy = "orden")
 	private List<ServicioAplicado> servicioAplicados;
 
 	public Orden() {
@@ -332,4 +337,21 @@ public class Orden implements Serializable {
 		return servicioAplicado;
 	}
 
+	public double getCostoRepuestos() {
+		return costoRepuestos;
+	}
+
+	public void setCostoRepuestos(double costoRepuestos) {
+		this.costoRepuestos = costoRepuestos;
+	}
+
+	public double getCostoServicios() {
+		return costoServicios;
+	}
+
+	public void setCostoServicios(double costoServicios) {
+		this.costoServicios = costoServicios;
+	}
+
+	
 }

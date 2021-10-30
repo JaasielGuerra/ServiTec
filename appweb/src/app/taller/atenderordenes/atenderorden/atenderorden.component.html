@@ -15,15 +15,15 @@
       <img src="../../../../assets/img/icons8-customer-100.png" class="img-fluid mx-auto d-block mb-3" alt="customer">
       <div class="row">
         <div class="col-md-3 font-weight-bold font-italic">Nombre:</div>
-        <div class="col-md-9 font-italic">Lorem, ipsum dolor.</div>
+        <div class="col-md-9 font-italic">{{ordenAtender.cliente.nombreCliente}}</div>
       </div>
       <div class="row">
         <div class="col-md-3 font-weight-bold font-italic">Teléfono:</div>
-        <div class="col-md-9 font-italic">123</div>
+        <div class="col-md-9 font-italic">{{ordenAtender.cliente.telefono}}</div>
       </div>
       <div class="row">
         <div class="col-md-3 font-weight-bold font-italic">Correo:</div>
-        <div class="col-md-9 font-italic">Lorem ipsum dolor sit.</div>
+        <div class="col-md-9 font-italic">{{ordenAtender.cliente.correo}}</div>
       </div>
 
     </div>
@@ -42,18 +42,20 @@
     </div>
     <div class="modal-body">
 
-      <form novalidate #f="ngForm">
+      <form novalidate #f="ngForm" (ngSubmit)="addFotosDiagnostico()">
         <div class="row">
           <div class="col-md-12">
-            <input type="file" class="form-control-file" id="imagen">
+            <input type="file" class="form-control-file" id="imagen" (change)="onChangedFileFotoDiagnostico($event)"
+              maxlength="65535" accept=".jpg">
           </div>
           <div class="col-md-12 form-group">
             <label>Descripción</label>
-            <input type="text" class="form-control" required value="demo">
+            <input type="text" class="form-control" required [(ngModel)]="descripcionFotoDiagnostico"
+              name="descripcionFotoDiagnostico">
           </div>
         </div>
 
-        <button class="btn btn-primary" [disabled]="!f.form.valid">Aceptar</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid || !selectedFile">Aceptar</button>
       </form>
 
     </div>
@@ -61,7 +63,6 @@
       <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Cerrar</button>
     </div>
   </ng-template>
-
 
   <ng-template #modalServicio let-modal>
 
@@ -73,29 +74,31 @@
     </div>
     <div class="modal-body">
 
-      <form novalidate #f="ngForm">
+      <form novalidate #f="ngForm" (ngSubmit)="addServicio()">
         <div class="row">
           <div class="col-md-12 form-group">
             <label>Seleccionar servicio</label>
-            <select class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
+            <select class="form-control" (change)="onChangeSelectServicio()" [(ngModel)]="idServicioSel"
+              name="idServicioSel" required>
+              <option *ngFor="let s of serviciostecnicos" [value]="s.idServicio">{{s.descripcion}}</option>
             </select>
           </div>
           <div class="col-md-8 form-group">
             <label>Seleccione precio</label>
-            <select class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
+            <select class="form-control" [(ngModel)]="precioSel" name="precioSel" required>
+              <option [value]="servicioSel.precioA">Q{{servicioSel.precioA}}</option>
+              <option [value]="servicioSel.precioB">Q{{servicioSel.precioB}}</option>
+              <option [value]="servicioSel.precioC">Q{{servicioSel.precioC}}</option>
             </select>
           </div>
           <div class="col-md-4 form-group">
             <label>Cantidad</label>
-            <input type="number" class="form-control" required placeholder="Cantidad">
+            <input type="number" class="form-control" required placeholder="Cantidad" [(ngModel)]="cantidadServicioAdd"
+              name="cantidadServicioAdd" min="1">
           </div>
         </div>
 
-        <button class="btn btn-primary" [disabled]="!f.form.valid">Aceptar</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">Aceptar</button>
       </form>
 
     </div>
@@ -114,26 +117,27 @@
     </div>
     <div class="modal-body">
 
-      <form novalidate #f="ngForm">
+      <form novalidate #f="ngForm" (ngSubmit)="addRepuesto()">
         <div class="row">
           <div class="col-md-12 form-group">
             <label>Seleccionar repuesto</label>
-            <select class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
+            <select class="form-control" required [(ngModel)]="idRepuestoSel" name="idRepuestoSel"
+              (change)="onChangeSelectRepuesto()">
+              <option *ngFor="let r of repuestos" [value]="r.idInventarioRepuesto">{{r.descripcion}}</option>
             </select>
           </div>
           <div class="col-md-4 form-group">
             <label>Precio</label>
-            <input type="number" class="form-control" required placeholder="Q">
+            <input type="number" class="form-control" required placeholder="Q" disabled [value]="repuestoSel.precio">
           </div>
           <div class="col-md-4 form-group">
             <label>Cantidad</label>
-            <input type="number" class="form-control" required placeholder="Cantidad">
+            <input type="number" class="form-control" required placeholder="Cantidad" [(ngModel)]="cantidadRepuestoAdd"
+              name="cantidadRepuestoAdd" min="1">
           </div>
         </div>
 
-        <button class="btn btn-primary" [disabled]="!f.form.valid">Aceptar</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">Aceptar</button>
       </form>
 
     </div>
@@ -144,185 +148,211 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <form action="#">
-          <div class="card-header">
-            <h5 class="title">Atender orden de servicio</h5>
+      <div class="card" *ngIf="ordenAtender">
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card text-white bg-secondary">
-                  <div class="card-header text-center">
-                    <h6 class="font-italic font-weight-bold"><ins>Orden de servicio</ins></h6>
-                  </div>
-                  <div class="card-body">
+        <div class="card-header">
+          <h5 class="title">Atender orden de servicio</h5>
 
-                    <div class="row">
-                      <div class="col-md-10">
-                        <div class="row">
-                          <div class="col-md-3 font-weight-bold font-italic">Descripcion orden:</div>
-                          <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Obcaecati, provident.</div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-3 font-weight-bold font-italic">Descripcion recibido:</div>
-                          <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Obcaecati, provident.</div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-3 font-weight-bold font-italic">Motivo:</div>
-                          <div class="col-md-6 font-italic">Lorem ipsum.</div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-3 font-weight-bold font-italic">Prioridad:</div>
-                          <div class="col-md-6 font-italic">Lorem ipsum.</div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-3 font-weight-bold font-italic">Cliente:</div>
-                          <div class="col-md-8 font-italic">Lorem ipsum dolor sit amet.</div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <hr>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-2">
-                            <h5 class="font-weight-bold font-italic"><ins>Total costo:</ins></h5>
-                          </div>
-                          <div class="col-md-2">
-                            <h5 class="font-weight-bold font-italic text-success"><ins>Q100.0</ins></h5>
-                          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card text-white bg-secondary">
+                <div class="card-header text-center">
+                  <h6 class="font-italic font-weight-bold"><ins>Orden de servicio</ins></h6>
+                </div>
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3 font-weight-bold font-italic">Descripcion orden:</div>
+                        <div class="col-md-8 font-italic">{{ordenAtender.descripcionOrden}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3 font-weight-bold font-italic">Descripcion recibido:</div>
+                        <div class="col-md-8 font-italic">{{ordenAtender.descripcionRecibido}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3 font-weight-bold font-italic">Motivo:</div>
+                        <div class="col-md-6 font-italic">{{ordenAtender.motivoOrden.descripcion}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3 font-weight-bold font-italic">Prioridad:</div>
+                        <div class="col-md-6 font-italic">
+                          <span *ngIf="ordenAtender.prioridad.idPrioridad === 3"
+                            class="badge badge-danger">{{ordenAtender.prioridad.descripcion}}</span>
+                          <span *ngIf="ordenAtender.prioridad.idPrioridad === 2"
+                            class="badge badge-warning">{{ordenAtender.prioridad.descripcion}}</span>
+                          <span *ngIf="ordenAtender.prioridad.idPrioridad === 1"
+                            class="badge badge-info">{{ordenAtender.prioridad.descripcion}}</span>
                         </div>
                       </div>
-                      <div class="col-md-2">
-                        <div class="font-weight-bold font-italic">Imagen referencia:</div>
-                        <img src="../../../../assets/img/angular2-logo-red.png" class="img-fluid img-thumbnail"
-                          alt="img">
+                      <div class="row">
+                        <div class="col-md-3 font-weight-bold font-italic">Cliente:</div>
+                        <div class="col-md-8 font-italic">{{ordenAtender.cliente.nombreCliente}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <hr>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-2">
+                          <h5 class="font-weight-bold font-italic"><ins>Total costo:</ins></h5>
+                        </div>
+                        <div class="col-md-2">
+                          <h5 class="font-weight-bold font-italic text-success"><ins>Q{{ordenAtender.totalCostoServicio}}</ins></h5>
+                        </div>
                       </div>
                     </div>
-
-                    <button type="button" class="btn btn-info" (click)="detallesCliente(modalCliente)">Detalles
-                      cliente</button>
-                    <button type="button" class="btn btn-warning">Poner pendiente</button>
-                    <button type="button" class="btn btn-danger">Finalizar</button>
-
+                    <div class="col-md-2">
+                      <div class="font-weight-bold font-italic">Imagen referencia:</div>
+                      <img [src]="'data:image/jpg;base64,'+ordenAtender.imagenReferencia"
+                        class="img-fluid img-thumbnail" alt="..." style="max-height: 150px;"
+                        *ngIf="ordenAtender.imagenReferencia">
+                    </div>
                   </div>
+                  <div class="d-inline-flex">
+                    <button type="button" class="btn btn-info" (click)="detallesCliente(modalCliente)">
+                      Detalles cliente
+                    </button>
+                    <button type="button" class="btn btn-warning" (click)="ponerPendiente()">Poner pendiente</button>
+                    <button type="button" class="btn btn-danger" (click)="finalizar()">Finalizar</button>
+                    <a routerLink="/atender-ordenes" class="btn btn-light" *ngIf="false">Regresar</a>
+                    <div class="form-check">
+                      <label class="form-check-label text-white">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="servicioNoAplicable">
+                        Este servicio NO se puede aplicar.
+                        <span class="form-check-sign"></span>
+                      </label>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
-
           </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12 form-group">
-                <label>Diagnóstico técnico</label>
-                <input type="text" class="form-control" placeholder="Describa el diagnóstico técnico..." required>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="d-flex justify-content-between">
-                  <label>Fotos diagnóstico</label>
-                  <button type="button" class="btn btn-success btn-sm btn-round"
-                    (click)="agregarFoto(modalImagen)">Agregar</button>
-                </div>
-                <table class="table table-sm table-bordered table-striped">
-                  <thead class="thead-dark">
-                    <th>#</th>
-                    <th>Imagen</th>
-                    <th>Descripcion</th>
-                    <th class="text-center">Quitar</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>...</td>
-                      <td>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
-                      </td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm btn-round">Quitar</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label>Diagnóstico técnico</label>
+              <input type="text" class="form-control" placeholder="Describa el diagnóstico técnico..." required
+                [(ngModel)]="ordenAtender.diagnosticoTecnico">
             </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="d-flex justify-content-between">
-                  <label>Servicios aplicados</label>
-                  <button type="button" class="btn btn-success btn-sm btn-round"
-                    (click)="agregarServicio(modalServicio)">Agregar</button>
-                </div>
-                <table class="table table-sm table-bordered table-striped">
-                  <thead class="thead-dark">
-                    <th>#</th>
-                    <th>Servicio</th>
-                    <th class="text-right">Precio</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-center">Quitar</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                      <td class="text-right">Q100.0</td>
-                      <td class="text-center">2</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm btn-round">Quitar</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="d-flex justify-content-between">
-                  <label>Repuestos empleados</label>
-                  <button type="button" class="btn btn-success btn-sm btn-round" (click)="agregarRepuesto(modalRepuesto)">Agregar</button>
-                </div>
-                <table class="table table-sm table-bordered table-striped">
-                  <thead class="thead-dark">
-                    <th>#</th>
-                    <th>Repuesto</th>
-                    <th class="text-right">Precio</th>
-                    <th class="text-center">Cantidad</th>
-                    <th class="text-center">Quitar</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                      <td class="text-right">Q100.0</td>
-                      <td class="text-center">2</td>
-                      <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm btn-round">Quitar</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-8 form-group">
-                <label>Descripción de extras aplicados</label>
-                <input type="text" class="form-control" placeholder="Extras aplicados" required>
-              </div>
-              <div class="col-md-4 form-group">
-                <label>Costo de extras</label>
-                <input type="number" class="form-control" placeholder="Q" required>
-              </div>
-            </div>
-
           </div>
-        </form>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-between">
+                <label>Fotos diagnóstico</label>
+                <button type="button" class="btn btn-success btn-sm btn-round"
+                  (click)="modalAgregarFoto(modalImagen)">Agregar</button>
+              </div>
+              <table class="table table-sm table-bordered table-striped">
+                <thead class="thead-dark">
+                  <th>#</th>
+                  <th>Imagen</th>
+                  <th>Descripcion</th>
+                  <th class="text-center">Quitar</th>
+                </thead>
+                <tbody *ngFor="let f of fotosDiagnostico">
+                  <tr>
+                    <td>{{f.idFotosDiagnostico}}</td>
+                    <td>
+                      <img [src]="'data:image/jpg;base64,'+f.imagen" class="img-fluid img-thumbnail" alt="..."
+                        style="max-height: 50px;">
+                    </td>
+                    <td>
+                      {{f.descripcion}}
+                    </td>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-danger btn-sm btn-round"
+                        (click)="eliminarFotoDiagnostico(f.idFotosDiagnostico)">Quitar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-between">
+                <label>Servicios aplicados</label>
+                <button type="button" class="btn btn-success btn-sm btn-round"
+                  (click)="modalAgregarServicio(modalServicio)">Agregar</button>
+              </div>
+              <table class="table table-sm table-bordered table-striped">
+                <thead class="thead-dark">
+                  <th>#</th>
+                  <th>Servicio</th>
+                  <th class="text-right">Precio</th>
+                  <th class="text-center">Cantidad</th>
+                  <th class="text-center">Quitar</th>
+                </thead>
+                <tbody *ngFor="let s of serviciosAplicados">
+                  <tr>
+                    <td>{{s.idServicioAplicado}}</td>
+                    <td>{{s.servicio.descripcion}}</td>
+                    <td class="text-right">Q{{s.precio}}</td>
+                    <td class="text-center">{{s.cantidad}}</td>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-danger btn-sm btn-round"
+                        (click)="eliminarServicio(s.idServicioAplicado)">Quitar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-between">
+                <label>Repuestos empleados</label>
+                <button type="button" class="btn btn-success btn-sm btn-round"
+                  (click)="modalAgregarRepuesto(modalRepuesto)">Agregar</button>
+              </div>
+              <table class="table table-sm table-bordered table-striped">
+                <thead class="thead-dark">
+                  <th>#</th>
+                  <th>Repuesto</th>
+                  <th class="text-right">Precio</th>
+                  <th class="text-center">Cantidad</th>
+                  <th class="text-center">Quitar</th>
+                </thead>
+                <tbody *ngFor="let r of repuestosEmpleados">
+                  <tr>
+                    <td>{{r.idRepuestoEmpleado}}</td>
+                    <td>{{r.inventarioRepuesto.descripcion}}</td>
+                    <td class="text-right">Q{{r.precio}}</td>
+                    <td class="text-center">{{r.cantidad}}</td>
+                    <td class="text-center">
+                      <button type="button" class="btn btn-danger btn-sm btn-round"
+                        (click)="eliminarRepuesto(r.idRepuestoEmpleado)">Quitar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-8 form-group">
+              <label>Descripción de extras aplicados</label>
+              <input type="text" class="form-control" placeholder="Extras aplicados" required
+                [(ngModel)]="ordenAtender.descripcionExtra">
+            </div>
+            <div class="col-md-4 form-group">
+              <label>Costo de extras</label>
+              <input type="number" class="form-control" placeholder="Q" required [(ngModel)]="ordenAtender.costoExtra"
+                (keyup)="sumarTotalCostoServicio()">
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
 

@@ -5,25 +5,25 @@
         <h6 class="text-success font-italic">Reservadas:</h6>
       </div>
       <div class="col-md-1 col-lg-1">
-        <label class="text-white font-italic">10</label>
+        <label class="text-white font-italic">{{totalReservadas}}</label>
       </div>
       <div class="col-md-2 col-lg-1">
         <h6 class="text-info font-italic">Atendiendo:</h6>
       </div>
       <div class="col-md-1 col-lg-1">
-        <label class="text-white font-italic">3</label>
+        <label class="text-white font-italic">{{totalAtendiendo}}</label>
       </div>
       <div class="col-md-2 col-lg-1">
         <h6 class="text-warning font-italic">Pendientes:</h6>
       </div>
       <div class="col-md-1 col-lg-1">
-        <label class="text-white font-italic">3</label>
+        <label class="text-white font-italic">{{totalPendientes}}</label>
       </div>
       <div class="col-md-2 col-lg-1">
         <h6 class="text-white font-italic">Fecha:</h6>
       </div>
       <div class="col-md-1 col-lg-1">
-        <label class="text-white font-italic">Fecha aqui</label>
+        <label class="text-white font-italic">{{fechaSel}}</label>
       </div>
     </div>
     <div class="row">
@@ -31,10 +31,10 @@
         <h6 class="text-danger font-italic">Técnico:</h6>
       </div>
       <div class="col-md-8 col-lg-6">
-        <label class="text-white font-italic">Nombre del tecnino logueado</label>
+        <label class="text-white font-italic">{{tecnicoEnSesion.nombreCompleto}}</label>
       </div>
+    </div>
   </div>
-</div>
 
 </div>
 <div class="main-content">
@@ -46,46 +46,49 @@
         </div>
         <div class="card-body">
 
-          <form>
-            <div class="row">
-              <div class="col-md-2">
-                <label>Estado</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Prioridad</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Motivo</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Cliente</label>
-                <select class="form-control form-control-sm">
-                  <option value="{{0}}">Seleccionar</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <label>Fecha</label>
-                <input type="date" class="form-control form-control-sm">
-              </div>
-              <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-primary mb-0 btn-sm">Consultar</button>
-              </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label>Estado</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idEstadoSel">
+                <option value="0">- Todos -</option>
+                <option *ngFor="let e of estados" [value]="e.idEstadoOrden">{{e.descripcion}}</option>
+              </select>
             </div>
-          </form>
+            <div class="col-md-2">
+              <label>Prioridad</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idPriodidadSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let p of prioridaddes" [value]="p.idPrioridad">{{p.descripcion}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Motivo</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idMotivoSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let m of motivos" [value]="m.idMotivoOrden">{{m.descripcion}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Cliente</label>
+              <select class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="idClienteSel">
+                <option value="">- Todos -</option>
+                <option *ngFor="let c of clientes" [value]="c.idCliente">{{c.nombreCliente}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>Fecha</label>
+              <input type="date" class="form-control form-control-sm" (change)="consultar()" [(ngModel)]="fechaSel">
+            </div>
+
+          </div>
+
 
           <div class="table-responsive">
             <table class="table">
               <thead class="text-primary">
                 <th>#</th>
+                <th>Foto</th>
                 <th>Fecha Ingreso</th>
                 <th>Entrega máxima</th>
                 <th>Descripcion</th>
@@ -95,29 +98,39 @@
                 <th>Cliente</th>
                 <th>Operaciones</th>
               </thead>
-              <tbody>
+              <tbody *ngFor="let o of ordenesAtender">
                 <tr>
-                  <td>1</td>
-                  <td>demo</td>
-                  <td>asds</td>
+                  <td>{{o.idOrden}}</td>
                   <td>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, consequatur!
+                    <img [src]="'data:image/jpg;base64,'+o.imagenReferencia" class="img-fluid img-thumbnail" alt="..."
+                      style="max-height: 75px;">
+                  </td>
+                  <td>{{o.fechaIngreso}}</td>
+                  <td>{{o.fechaMaximaEntrega}}</td>
+                  <td>
+                    {{o.descripcionOrden}}
                   </td>
                   <td>
-                    <span class="badge badge-success">Reservada</span>
-                    <span class="badge badge-warning">Pendiente</span>
-                    <span class="badge badge-primary">Atendiendo</span>
+                    <span *ngIf="o.estadoOrden.idEstadoOrden === 1"
+                      class="badge badge-success">{{o.estadoOrden.descripcion}}</span>
+                    <span *ngIf="o.estadoOrden.idEstadoOrden === 2"
+                      class="badge badge-primary">{{o.estadoOrden.descripcion}}</span>
+                    <span *ngIf="o.estadoOrden.idEstadoOrden === 3"
+                      class="badge badge-warning">{{o.estadoOrden.descripcion}}</span>
                   </td>
                   <td>
-                    <span class="badge badge-danger">Alta</span>
-                    <span class="badge badge-warning">Media</span>
-                    <span class="badge badge-success">Baja</span>
+                    <span *ngIf="o.prioridad.idPrioridad === 3"
+                      class="badge badge-danger">{{o.prioridad.descripcion}}</span>
+                    <span *ngIf="o.prioridad.idPrioridad === 2"
+                      class="badge badge-warning">{{o.prioridad.descripcion}}</span>
+                    <span *ngIf="o.prioridad.idPrioridad === 1"
+                      class="badge badge-info">{{o.prioridad.descripcion}}</span>
                   </td>
-                  <td>asds</td>
-                  <td>asds</td>
+                  <td> {{o.motivoOrden.descripcion}}</td>
+                  <td> {{o.cliente.nombreCliente}}</td>
                   <td>
-                    <a class="btn btn-info btn-sm btn-round" routerLink="/atender-ordenes/atender/1">Atender</a>
-                    <a class="btn btn-success btn-sm btn-round"  routerLink="/atender-ordenes/atender/1">Continuar</a>
+                    <a class="btn btn-success btn-sm btn-round"
+                      routerLink="/atender-ordenes/atender/{{o.idOrden}}">Atender</a>
                   </td>
                 </tr>
               </tbody>

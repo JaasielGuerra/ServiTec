@@ -20,7 +20,8 @@
 
 	<dependencies>
 
-		<!-- Modulo hibernate 5 para manejo de objetos de persistencia por parte de JackSon -->
+		<!-- Modulo hibernate 5 para manejo de objetos de persistencia por parte 
+			de JackSon -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate5</artifactId>
@@ -35,7 +36,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-	
+
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
@@ -46,6 +47,23 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.16.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-support</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>
